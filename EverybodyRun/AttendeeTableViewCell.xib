@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="GOTHIC.TTF">
+            <string>CenturyGothic</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="AttendeeTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_user.png" translatesAutoresizingMaskIntoConstraints="NO" id="hIQ-yh-jIo">
+                        <rect key="frame" x="16" y="11" width="32" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="M6K-Af-gGI"/>
+                            <constraint firstAttribute="width" constant="32" id="Wnf-pS-aSo"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="David Sand" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAB-su-FrE">
+                        <rect key="frame" x="60" y="0.0" width="307" height="54"/>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="16"/>
+                        <color key="textColor" red="0.65098039215686276" green="0.6588235294117647" blue="0.6705882352941176" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="gAB-su-FrE" firstAttribute="leading" secondItem="hIQ-yh-jIo" secondAttribute="trailing" constant="12" id="A7j-rZ-dsG"/>
+                    <constraint firstItem="hIQ-yh-jIo" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="WMQ-al-GoL"/>
+                    <constraint firstAttribute="trailing" secondItem="gAB-su-FrE" secondAttribute="trailing" constant="8" id="Y02-JN-RVg"/>
+                    <constraint firstItem="hIQ-yh-jIo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="mEb-Q0-r7D"/>
+                    <constraint firstAttribute="bottom" secondItem="gAB-su-FrE" secondAttribute="bottom" id="riX-r7-qb4"/>
+                    <constraint firstItem="gAB-su-FrE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="vp4-MD-CXj"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ivAvatar" destination="hIQ-yh-jIo" id="cjL-Sf-wVF"/>
+                <outlet property="lbName" destination="gAB-su-FrE" id="nnj-w2-Suw"/>
+            </connections>
+            <point key="canvasLocation" x="487.5" y="323.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="default_user.png" width="245" height="244"/>
+    </resources>
+</document>

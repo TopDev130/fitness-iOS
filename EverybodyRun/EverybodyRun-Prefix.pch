@@ -1,0 +1,35 @@
+//
+//  EverybodyRun-Prefix.pch
+//  EverybodyRun
+//
+//  Created by star on 1/31/16.
+//  Copyright © 2016 samule. All rights reserved.
+//
+
+#ifndef EverybodyRun_Prefix_pch
+#define EverybodyRun_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <Foundation/Foundation.h>
+
+#import "Global.h"
+
+#import "User.h"
+#import "Event.h"
+#import "Attendee.h"
+#import "AttendImage.h"
+#import "Shop.h"
+#import "Blog.h"
+#import "MemberOnlyEvent.h"
+#import "Notification.h"
+
+#import "AppEngine.h"
+#import "CoreHelper.h"
+#import "NetworkClient.h"
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
+#import <AFNetworking/UIButton+AFNetworking.h>
+
+#endif /* EverybodyRun_Prefix_pch */

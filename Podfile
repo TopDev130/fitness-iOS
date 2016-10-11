@@ -1,0 +1,20 @@
+target "EverybodyRun" do
+
+pod 'HNKGooglePlacesAutocomplete', '~> 1.1'
+pod 'SVProgressHUD'
+pod 'InstagramKit', '~> 3.0'
+pod 'InstagramKit/UICKeyChainStore'
+pod 'AFNetworking', '~> 2.5'
+pod 'FBSDKCoreKit'
+pod 'FBSDKLoginKit'
+pod 'FBSDKShareKit'
+pod 'RATreeView'
+pod 'MFSideMenu'
+pod 'SWTableViewCell', '~> 0.3.7'
+pod 'Branch'
+pod 'DIDatepicker'
+pod 'CoreTextLabel'
+pod 'JTCalendar', '~> 2.0'
+pod 'MarqueeLabel'
+pod 'QTree-objc'
+end
