@@ -34,10 +34,14 @@
 #import "CreateEventViewController.h"
 #import <Mapbox/Mapbox.h>
 #import "ERImageView.h"
+#import "Branch.h"
+#import <FBSDKShareKit/FBSDKShareKit.h>
+#import <Social/Social.h>
+#import <MessageUI/MessageUI.h>
 
 static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCellIdentifier";
 
-@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, MGLMapViewDelegate, UISearchBarDelegate, SWTableViewCellDelegate, MFMailComposeViewControllerDelegate, JTCalendarDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate>
+@interface HomeViewController () <MFMessageComposeViewControllerDelegate,UITableViewDataSource, UITableViewDelegate, MGLMapViewDelegate, UISearchBarDelegate, SWTableViewCellDelegate, MFMailComposeViewControllerDelegate, JTCalendarDelegate, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate, FBSDKSharingDelegate, UIDocumentInteractionControllerDelegate>
 {
     HNKGooglePlacesAutocompleteQuery    *searchQuery;
     JTCalendarManager                   *calendarManager;
@@ -82,7 +86,9 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
     Shop                                *selectedShop;
     
     UIImagePickerController             *imagePicker;
-    
+    UIDocumentInteractionController         *docController;
+    DID_COMPLETE_CALL_BACK_BLOCK            completeBlock;
+
 }
 
 @property(nonatomic, strong) QTree                              *qTree;
@@ -148,6 +154,7 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
 @property (weak, nonatomic) IBOutlet UILabel                    *lbMemberOnlyPhoneFull;
 @property (weak, nonatomic) IBOutlet UILabel                    *lbMemberOnlyDescriptionFull;
 @property (nonatomic, weak) IBOutlet UILabel                    *lbMemberOnlyCategoryFull;
+@property (weak, nonatomic) IBOutlet UIButton                   *btShare;
 
 //Shop
 @property (nonatomic, weak) IBOutlet UIView                     *viShopContainer;
@@ -196,6 +203,8 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
 @synthesize lbEventInfo;
 @synthesize lbEventAttendee;
 @synthesize btRunIt;
+
+@synthesize btShare;
 
 @synthesize viEventDetailFull;
 @synthesize viEventDetailFullInfoContainer;
@@ -1808,6 +1817,9 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
     btRunIt.layer.masksToBounds = YES;
     btRunIt.layer.cornerRadius = BUTTON_CORNER_RADIUS;
     
+    btShare.layer.masksToBounds = YES;
+    btShare.layer.cornerRadius = BUTTON_CORNER_RADIUS;
+    
     viEventDetail.frame = CGRectMake(0, self.view.frame.size.height - viEventDetail.frame.size.height, self.view.frame.size.width, viEventDetail.frame.size.height);
     [self.view addSubview: viEventDetail];
     
@@ -1860,6 +1872,7 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
     viShopContainer.hidden = YES;
     viShopFullContainer.hidden = YES;
 
+    
     //Fill out all information.
     lbEventTitle.text = e.name;
     lbEventFullTitle.text = e.name;
@@ -2411,6 +2424,381 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
                      }];
 }
 
+
+- (IBAction)shareButtonClick:(id)sender {
+    [self shareService:selectedMemberOnlyEvent completedHander:^{
+        
+    }];
+}
+
+- (void) shareService: (MemberOnlyEvent*) e completedHander: (void (^)(void))completed
+{
+
+    completeBlock = completed;
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle: @"Share" message: @"Would you like to share this service with your friends"
+                                                            preferredStyle: UIAlertControllerStyleActionSheet];
+    UIAlertAction* facebookAction = [UIAlertAction actionWithTitle: @"Facebook"
+                                                             style: UIAlertActionStyleDefault
+                                                           handler:^(UIAlertAction * _Nonnull action) {
+                                                               
+                                                               [self shareServiceFB: e completedHander: completed];
+                                                               
+                                                           }];
+    UIAlertAction* twitterAction = [UIAlertAction actionWithTitle: @"Twitter"
+                                                            style: UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * _Nonnull action) {
+                                                              
+                                                              [self shareServiceTwitter: e completedHander: completed];
+                                                          }];
+    UIAlertAction* messageAction = [UIAlertAction actionWithTitle: @"Message"
+                                                            style: UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * _Nonnull action) {
+                                                              
+                                                              [self shareSeviceMessage: e completedHander: completed];
+                                                          }];
+    UIAlertAction* emailAction = [UIAlertAction actionWithTitle: @"Email"
+                                                          style: UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * _Nonnull action) {
+                                                            
+                                                            [self shareServiceEmail: e completedHander: completed];
+                                                        }];
+    
+    UIAlertAction* instagramAction = [UIAlertAction actionWithTitle: @"Instagram"
+                                                              style: UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                                
+                                                                [self shareServiceInstagram:e completedHander: completed];
+                                                            }];
+    
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle: @"No Thanks"
+                                                           style: UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             completed();
+                                                         }];
+    [alert addAction: facebookAction];
+    [alert addAction: twitterAction];
+    [alert addAction: messageAction];
+    [alert addAction: emailAction];
+    [alert addAction: instagramAction];
+    [alert addAction: cancelAction];
+    [self presentViewController: alert animated: YES completion: nil];
+}
+
+#pragma mark - Sharing.
+
+- (void) shareServiceFB: (MemberOnlyEvent*) e completedHander: (void (^)(void))completed
+{
+
+    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys: [NSString stringWithFormat: @"%d", e.event_id], @"event_id", nil];
+    [SVProgressHUD showWithStatus: @"event link copied to clipboard, feel free to paste"];
+    [[Branch getInstance] getShortURLWithParams:params andCallback:^(NSString *url, NSError *error)
+     {
+         UIImage *image = [UIImage imageWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:e.img]]];
+         
+         [SVProgressHUD dismiss];
+         
+         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+         pasteboard.string = [NSString stringWithFormat: @"%@\n%@", @"I would like you to check out this place I found on the #everybody run app, click for details:", url];
+         
+         FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+         photo.image = image;
+         photo.userGenerated = YES;
+         
+         FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+         content.photos = @[photo];
+         
+         content.hashtag = [FBSDKHashtag hashtagWithString: @"#everybodyrun"];
+         
+         FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
+         dialog.mode = FBSDKShareDialogModeAutomatic;
+         dialog.shareContent = content;
+         dialog.delegate = self;
+         dialog.fromViewController = self;
+         [dialog show];
+
+     }];
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results
+{
+    NSLog(@"fb share result = %@", results);
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
+    NSLog(@"fb share error = %@", error);
+}
+
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer {
+    
+}
+
+- (void) shareServiceTwitter: (MemberOnlyEvent*) e completedHander: (void (^)(void))completed
+{
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter] && [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter])
+    {
+        NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys: [NSString stringWithFormat: @"%d", e.event_id], @"event_id", nil];
+        [SVProgressHUD show];
+        [[Branch getInstance] getShortURLWithParams:params andCallback:^(NSString *url, NSError *error)
+         {
+             [SVProgressHUD dismiss];
+             SLComposeViewController *tweetSheet = [SLComposeViewController
+                                                    composeViewControllerForServiceType:SLServiceTypeTwitter];
+             
+             [tweetSheet setInitialText: @"I would like you to check out this place I found on the #everybody run app, click for details:"];
+             [tweetSheet addURL: [NSURL URLWithString: url]];
+             SLComposeViewControllerCompletionHandler myBlock = ^(SLComposeViewControllerResult result)
+             {
+                 completed();
+             };
+             
+             tweetSheet.completionHandler = myBlock;
+             UIImage *image = [UIImage imageWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:e.img]]];
+             [tweetSheet addImage: image];
+             [self presentViewController:tweetSheet animated:YES completion: nil];
+         }];
+    }
+    else
+    {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle: @"No Twitter Accounts"
+                                                                       message: @"There are no Twitter accounts configured. You can add or create a Twitter account in Settings."
+                                                                preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertAction* actionOk = [UIAlertAction actionWithTitle: @"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            completed();
+        }];
+        [alert addAction: actionOk];
+        [self presentViewController: alert animated: YES completion: nil];
+    }
+}
+
+- (void) shareSeviceMessage: (MemberOnlyEvent*) e completedHander: (void (^)(void))completed
+{
+    if(![MFMessageComposeViewController canSendText])
+    {
+        UIAlertController* controller = [UIAlertController alertControllerWithTitle: nil
+                                                                            message:  @"Your device doesn't support SMS!"
+                                                                     preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertAction* actionOk = [UIAlertAction actionWithTitle: @"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            completed();
+        }];
+        [controller addAction: actionOk];
+        [self presentViewController: controller animated: YES completion: nil];
+        return;
+    }
+    
+    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys: [NSString stringWithFormat: @"%d", e.event_id], @"event_id", nil];
+    [SVProgressHUD show];
+    [[Branch getInstance] getShortURLWithParams:params andCallback:^(NSString *url, NSError *error)
+     {
+         [SVProgressHUD dismiss];
+         
+         NSString *message = [NSString stringWithFormat: @"%@\n%@", @"I would like you to check out this place I found on the #everybody run app, click for details:", url];
+         MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+         messageController.messageComposeDelegate = self;
+         [messageController setBody: [NSString stringWithFormat: @"%@\n%@", message, url]];
+         UIImage *image = [UIImage imageWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:e.img]]];
+         NSData* imageData = UIImagePNGRepresentation(image);
+         [messageController addAttachmentData: imageData typeIdentifier: @"public.data" filename: @"image.png"];
+         [self presentViewController:messageController animated:YES completion:nil];
+
+     }];
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult) result
+{
+    completeBlock();
+    switch (result) {
+        case MessageComposeResultCancelled:
+            break;
+            
+        case MessageComposeResultFailed:
+        {
+            UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to send SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [warningAlert show];
+            break;
+        }
+            
+        case MessageComposeResultSent:
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    completeBlock();
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void) shareServiceEmail: (MemberOnlyEvent*) e completedHander: (void (^)(void))completed
+{
+    if(![MFMailComposeViewController canSendMail])
+    {
+        UIAlertController* controller = [UIAlertController alertControllerWithTitle: nil
+                                                                            message:  @"Your device doesn't support Email!"
+                                                                     preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertAction* actionOk = [UIAlertAction actionWithTitle: @"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            completed();
+        }];
+        [controller addAction: actionOk];
+        [self presentViewController: controller animated: YES completion: nil];
+        return;
+    }
+    
+    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys: [NSString stringWithFormat: @"%d", e.event_id], @"event_id", nil];
+    [SVProgressHUD show];
+    [[Branch getInstance] getShortURLWithParams:params andCallback:^(NSString *url, NSError *error)
+     {
+         [SVProgressHUD dismiss];
+         // Email Content
+         NSString *messageBody = @"I would like you to check out this place I found on the #everybody run app, click for details:";
+         MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+         mc.mailComposeDelegate = self;
+         [mc setMessageBody: [NSString stringWithFormat: @"%@\n%@", messageBody, url] isHTML:NO];
+         
+         UIImage *image = [UIImage imageWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:e.img]]];
+
+         NSData* imageData = UIImagePNGRepresentation(image);
+         [mc addAttachmentData: imageData mimeType: @"image/png" fileName: @"image.png"];
+         [self presentViewController:mc animated:YES completion:nil];
+     }];
+}
+
+- (void) shareServiceInstagram: (MemberOnlyEvent*) e completedHander: (void (^)(void))completed
+{
+    //Sharing Instagram.
+    NSURL *instagramURL = [NSURL URLWithString:@"instagram://app"];
+    if([[UIApplication sharedApplication] canOpenURL:instagramURL])
+    {
+        UIImage *image = [UIImage imageWithData:[[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:e.img]]];
+        
+        UIImage* imageNew = [self addWaterMark: image];
+        NSData *imageData=UIImagePNGRepresentation(imageNew);
+        NSString *writePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"instagram.igo"];
+        if (![imageData writeToFile:writePath atomically:YES]) {
+            // failure
+            NSLog(@"image save failed to path %@", writePath);
+        }
+        else {
+            // success.
+        }
+        
+        NSURL *imageURL=[NSURL fileURLWithPath: writePath];
+        docController = [UIDocumentInteractionController interactionControllerWithURL: imageURL];
+        //        docController.UTI=@"com.instagram.photo";
+        docController.delegate = self;
+        [docController presentOpenInMenuFromRect: self.view.frame inView: self.view animated: YES];
+
+    }
+    else
+    {
+        UIAlertController* controller = [UIAlertController alertControllerWithTitle: nil
+                                                                            message: MSG_INSTAGRAM_NOT_SUPPORT
+                                                                     preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertAction* actionOk = [UIAlertAction actionWithTitle: @"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            completed();
+        }];
+        [controller addAction: actionOk];
+        [self presentViewController: controller animated: YES completion: nil];
+    }
+    
+}
+
+- (UIImage*) addWaterMark: (UIImage*) backgroundImage
+{
+    //    CGRect screenBound = [[UIScreen mainScreen] bounds];
+    //    float scale = [UIScreen mainScreen].scale;
+    //    UIImage* croppedImage = [self imageByCroppingImage: backgroundImage width: screenBound.size.width * scale];
+    
+    UIImage* croppedImage = backgroundImage;
+    UIImage *watermarkImage = [UIImage imageNamed:@"mask_image.png"];
+    
+    UIGraphicsBeginImageContextWithOptions(croppedImage.size, YES, croppedImage.scale);
+    [croppedImage drawInRect:CGRectMake(0, 0, croppedImage.size.width, croppedImage.size.height)];
+    
+    float fw = watermarkImage.size.width / 2.0;
+    float fh = watermarkImage.size.height / 2.0;
+    float offset = 17.0;
+    
+    [watermarkImage drawInRect:CGRectMake(croppedImage.size.width - fw - offset,
+                                          offset,
+                                          fw,
+                                          fh)];
+    
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return result;
+}
+
+- (void) postInstagrame: (UIImage*) image completedHander: (void (^)(void))completed
+{
+    completeBlock = completed;
+    
+    //Sharing Instagram.
+    NSURL *instagramURL = [NSURL URLWithString:@"instagram://app"];
+    if([[UIApplication sharedApplication] canOpenURL:instagramURL])
+    {
+        UIImage* imageNew = [self addWaterMark: image];
+        NSData *imageData=UIImagePNGRepresentation(imageNew);
+        NSString *writePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"instagram.igo"];
+        if (![imageData writeToFile:writePath atomically:YES]) {
+            // failure
+            NSLog(@"image save failed to path %@", writePath);
+        }
+        else {
+            // success.
+        }
+        
+        NSURL *imageURL=[NSURL fileURLWithPath: writePath];
+        docController = [UIDocumentInteractionController interactionControllerWithURL: imageURL];
+        //        docController.UTI=@"com.instagram.photo";
+        docController.delegate = self;
+        [docController presentOpenInMenuFromRect: self.view.frame inView: self.view animated: YES];
+    }
+    else
+    {
+        UIAlertController* controller = [UIAlertController alertControllerWithTitle: nil
+                                                                            message: MSG_INSTAGRAM_NOT_SUPPORT
+                                                                     preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertAction* actionOk = [UIAlertAction actionWithTitle: @"Ok" style: UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            completed();
+        }];
+        [controller addAction: actionOk];
+        [self presentViewController: controller animated: YES completion: nil];
+    }
+}
+
+- (void)documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(nullable NSString *)application
+{
+    completeBlock();
+}
+
+
+
 - (IBAction)actionRSVP:(id)sender
 {
     if(([selectedEvent.post_user_id intValue] == [[AppEngine sharedInstance].currentUser.user_id intValue])) {
@@ -2552,6 +2940,12 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
     viMemberOnlyFull.hidden = NO;
     viShopContainer.hidden = YES;
     viShopFullContainer.hidden = YES;
+//    viEventDetailInfoContainer.hidden = NO;
+//    viEventDetailFullInfoContainer.hidden = NO;
+//    viMemberOnlyContainer.hidden = YES;
+//    viMemberOnlyFull.hidden = YES;
+//    viShopContainer.hidden = YES;
+//    viShopFullContainer.hidden = YES;
     
     lbMemberOnlyTitle.text = e.title;
     lbMemberOnlyTitleFull.text = e.title;

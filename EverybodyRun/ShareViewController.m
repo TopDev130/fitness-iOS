@@ -190,6 +190,7 @@
 
 - (void) shareEventTwitter: (Event*) e completedHander: (void (^)(void))completed
 {
+    
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter] && [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter])
     {
         NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys: [NSString stringWithFormat: @"%d", [e.event_id intValue]], @"event_id", nil];
@@ -229,6 +230,7 @@
 
 - (void) shareEventMessage: (Event*) e completedHander: (void (^)(void))completed
 {
+    
     if(![MFMessageComposeViewController canSendText])
     {
         UIAlertController* controller = [UIAlertController alertControllerWithTitle: nil

@@ -152,6 +152,7 @@
             <string>CenturyGothic-BoldItalic</string>
             <string>CenturyGothic-BoldItalic</string>
             <string>CenturyGothic-BoldItalic</string>
+            <string>CenturyGothic-BoldItalic</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -2348,6 +2349,7 @@
                         <outlet property="btEvents" destination="mzL-jh-de1" id="lex-0u-EKe"/>
                         <outlet property="btFullRunIt" destination="1Qe-Be-dmA" id="vx1-7g-2kT"/>
                         <outlet property="btRunIt" destination="W5b-6b-b48" id="tLd-0u-9Hy"/>
+                        <outlet property="btShare" destination="5Z4-xA-PyU" id="VI3-FK-EgN"/>
                         <outlet property="btToday" destination="Ovi-0t-PIE" id="0Yg-8f-kJn"/>
                         <outlet property="btTomorrow" destination="rk5-kO-0KW" id="9Kv-On-gn0"/>
                         <outlet property="calendarContentView" destination="fCg-xx-nTv" id="XAs-Fp-qGE"/>
@@ -3155,17 +3157,17 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQt-MF-bYT" userLabel="View - Member Event">
                             <rect key="frame" x="0.0" y="25" width="375" height="115"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Greg’s park run" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ln-mJ-Ydz">
-                                    <rect key="frame" x="17" y="22" width="341" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Greg’s park run" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ln-mJ-Ydz">
+                                    <rect key="frame" x="17" y="22" width="238" height="42"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="21" id="9k1-vI-UFo"/>
+                                        <constraint firstAttribute="height" constant="42" id="9k1-vI-UFo"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="16"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2415 Fabre street" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJf-2x-tJk">
-                                    <rect key="frame" x="17" y="46" width="341" height="18"/>
+                                    <rect key="frame" x="17" y="67" width="341" height="16"/>
                                     <constraints>
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="9iU-YX-SAR"/>
                                     </constraints>
@@ -3188,14 +3190,31 @@
                                     <color key="textColor" red="1" green="0.97242495890000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="5Z4-xA-PyU">
+                                    <rect key="frame" x="266" y="19" width="93" height="33"/>
+                                    <color key="backgroundColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="33" id="aHN-vM-uHv"/>
+                                        <constraint firstAttribute="width" constant="93" id="oW0-6s-h4q"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="CenturyGothic-BoldItalic" family="Century Gothic" pointSize="17"/>
+                                    <state key="normal" title="share.">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="shareButtonClick:" destination="cjb-mC-nZN" eventType="touchUpInside" id="xch-6Q-afj"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.13725490200000001" green="0.1215686275" blue="0.12549019610000001" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="5Z4-xA-PyU" secondAttribute="trailing" constant="16" id="5aF-0j-9Yk"/>
                                 <constraint firstItem="MJf-2x-tJk" firstAttribute="leading" secondItem="iQt-MF-bYT" secondAttribute="leading" constant="17" id="6DZ-Dg-omW"/>
-                                <constraint firstAttribute="trailing" secondItem="4Ln-mJ-Ydz" secondAttribute="trailing" constant="17" id="Chh-GR-63i"/>
+                                <constraint firstAttribute="trailing" secondItem="4Ln-mJ-Ydz" secondAttribute="trailing" constant="120" id="Chh-GR-63i"/>
                                 <constraint firstAttribute="bottom" secondItem="MJf-2x-tJk" secondAttribute="bottom" constant="32" id="Hex-Ja-exR"/>
                                 <constraint firstItem="MAd-Oh-qDB" firstAttribute="top" secondItem="iQt-MF-bYT" secondAttribute="top" constant="4" id="JKt-7V-eF0"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MJf-2x-tJk" secondAttribute="bottom" constant="32" id="R1o-WH-JeA"/>
+                                <constraint firstItem="5Z4-xA-PyU" firstAttribute="top" secondItem="iQt-MF-bYT" secondAttribute="top" constant="19" id="VG7-io-X1t"/>
                                 <constraint firstItem="MJf-2x-tJk" firstAttribute="leading" secondItem="iQt-MF-bYT" secondAttribute="leading" constant="17" id="c0O-y8-dzb"/>
                                 <constraint firstItem="MJf-2x-tJk" firstAttribute="top" secondItem="4Ln-mJ-Ydz" secondAttribute="bottom" constant="3" id="e04-Ky-Efx"/>
                                 <constraint firstItem="MAd-Oh-qDB" firstAttribute="leading" secondItem="iQt-MF-bYT" secondAttribute="leading" constant="17" id="egi-vk-ENb"/>
@@ -4004,7 +4023,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CJE-Ar-eKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2247.5" y="-363.5"/>
+            <point key="canvasLocation" x="2735.5" y="-307.5"/>
         </scene>
         <!--Create Event View Controller-->
         <scene sceneID="vwJ-Cg-sK5">
