@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="GOTHIC.TTF">
@@ -152,7 +153,9 @@
             <string>CenturyGothic-BoldItalic</string>
             <string>CenturyGothic-BoldItalic</string>
             <string>CenturyGothic-BoldItalic</string>
-            <string>CenturyGothic-BoldItalic</string>
+        </mutableArray>
+        <mutableArray key="GOTHICI.TTF">
+            <string>CenturyGothic-Italic</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -2078,14 +2081,6 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aiA-Qa-GGH" userLabel="View - Search">
                                         <rect key="frame" x="63" y="22" width="250" height="30"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LAJ-gK-XSf">
-                                                <rect key="frame" x="14" y="0.0" width="206" height="30"/>
-                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="cjb-mC-nZN" id="g9j-al-z7E"/>
-                                                </connections>
-                                            </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="omY-WP-Upr">
                                                 <rect key="frame" x="224" y="5" width="20" height="20"/>
                                                 <constraints>
@@ -2096,6 +2091,14 @@
                                                     <action selector="actionSearchCancel:" destination="cjb-mC-nZN" eventType="touchUpInside" id="BaQ-G4-YQi"/>
                                                 </connections>
                                             </button>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LAJ-gK-XSf">
+                                                <rect key="frame" x="14" y="0.0" width="206" height="30"/>
+                                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="cjb-mC-nZN" id="g9j-al-z7E"/>
+                                                </connections>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -2146,10 +2149,10 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rk5-kO-0KW">
-                                                <rect key="frame" x="125" y="0.0" width="125" height="40"/>
+                                                <rect key="frame" x="249" y="0.0" width="126" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="16"/>
-                                                <state key="normal" title="Tomorrow">
+                                                <state key="normal" title="All">
                                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <state key="selected">
@@ -2160,7 +2163,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="whW-Qk-DKL">
-                                                <rect key="frame" x="250" y="0.0" width="125" height="40"/>
+                                                <rect key="frame" x="126" y="0.0" width="123" height="40"/>
                                                 <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="16"/>
                                                 <state key="normal" title="Date">
                                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -2173,7 +2176,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ovi-0t-PIE">
-                                                <rect key="frame" x="0.0" y="0.0" width="125" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="126" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="16"/>
                                                 <state key="normal" title="Today">
@@ -2190,29 +2193,28 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="uOB-3h-kSY" firstAttribute="leading" secondItem="bB2-wZ-r6d" secondAttribute="leading" id="2yu-TK-2l8"/>
-                                            <constraint firstItem="rk5-kO-0KW" firstAttribute="leading" secondItem="Ovi-0t-PIE" secondAttribute="trailing" id="37i-BV-nIV"/>
                                             <constraint firstAttribute="height" constant="40" id="3y1-LY-oc3"/>
-                                            <constraint firstItem="rk5-kO-0KW" firstAttribute="centerY" secondItem="bB2-wZ-r6d" secondAttribute="centerY" id="AHP-Cr-6Yu"/>
                                             <constraint firstItem="uOB-3h-kSY" firstAttribute="top" secondItem="bB2-wZ-r6d" secondAttribute="top" id="B4Q-xu-O8N"/>
-                                            <constraint firstItem="Ovi-0t-PIE" firstAttribute="height" secondItem="rk5-kO-0KW" secondAttribute="height" id="Cd2-L6-l5R"/>
                                             <constraint firstAttribute="trailing" secondItem="uOB-3h-kSY" secondAttribute="trailing" id="Fmb-I9-rzo"/>
                                             <constraint firstItem="QDn-pb-ssk" firstAttribute="leading" secondItem="bB2-wZ-r6d" secondAttribute="leading" id="JyR-aW-pnP"/>
-                                            <constraint firstItem="rk5-kO-0KW" firstAttribute="centerX" secondItem="bB2-wZ-r6d" secondAttribute="centerX" id="Mve-Eu-GDF"/>
                                             <constraint firstAttribute="bottom" secondItem="Ovi-0t-PIE" secondAttribute="bottom" id="NpY-tL-shd"/>
                                             <constraint firstAttribute="trailing" secondItem="QDn-pb-ssk" secondAttribute="trailing" id="Oqd-3E-60y"/>
-                                            <constraint firstItem="rk5-kO-0KW" firstAttribute="height" secondItem="whW-Qk-DKL" secondAttribute="height" id="RCs-xt-xBL"/>
+                                            <constraint firstItem="rk5-kO-0KW" firstAttribute="centerY" secondItem="bB2-wZ-r6d" secondAttribute="centerY" id="QfX-a6-Ilh"/>
+                                            <constraint firstItem="whW-Qk-DKL" firstAttribute="centerX" secondItem="bB2-wZ-r6d" secondAttribute="centerX" id="Uug-VL-PY9"/>
+                                            <constraint firstItem="Ovi-0t-PIE" firstAttribute="trailing" secondItem="whW-Qk-DKL" secondAttribute="leading" id="WlP-Z9-aif"/>
                                             <constraint firstItem="Ovi-0t-PIE" firstAttribute="leading" secondItem="bB2-wZ-r6d" secondAttribute="leading" id="ZIQ-Rz-KPL"/>
+                                            <constraint firstItem="rk5-kO-0KW" firstAttribute="leading" secondItem="whW-Qk-DKL" secondAttribute="trailing" id="aXr-En-wvQ"/>
                                             <constraint firstItem="Ovi-0t-PIE" firstAttribute="top" secondItem="bB2-wZ-r6d" secondAttribute="top" id="dXY-Tu-zJK"/>
                                             <constraint firstItem="Ovi-0t-PIE" firstAttribute="centerY" secondItem="bB2-wZ-r6d" secondAttribute="centerY" id="dvz-62-qe0"/>
                                             <constraint firstItem="QDn-pb-ssk" firstAttribute="leading" secondItem="bB2-wZ-r6d" secondAttribute="leading" id="fdn-dL-qgv"/>
+                                            <constraint firstItem="whW-Qk-DKL" firstAttribute="width" secondItem="bB2-wZ-r6d" secondAttribute="width" multiplier="0.33" id="gae-KD-hfk"/>
                                             <constraint firstAttribute="height" constant="40" id="kNa-Wx-e9g"/>
-                                            <constraint firstItem="whW-Qk-DKL" firstAttribute="leading" secondItem="rk5-kO-0KW" secondAttribute="trailing" id="ptR-UR-qob"/>
+                                            <constraint firstItem="rk5-kO-0KW" firstAttribute="height" secondItem="bB2-wZ-r6d" secondAttribute="height" id="o7Q-ti-Lcf"/>
+                                            <constraint firstAttribute="trailing" secondItem="rk5-kO-0KW" secondAttribute="trailing" id="rEg-hw-FjM"/>
                                             <constraint firstItem="whW-Qk-DKL" firstAttribute="centerY" secondItem="bB2-wZ-r6d" secondAttribute="centerY" id="sG4-05-aHA"/>
-                                            <constraint firstItem="rk5-kO-0KW" firstAttribute="width" secondItem="whW-Qk-DKL" secondAttribute="width" id="sm8-HA-DnX"/>
                                             <constraint firstAttribute="trailing" secondItem="QDn-pb-ssk" secondAttribute="trailing" id="tOX-1L-JHH"/>
-                                            <constraint firstAttribute="trailing" secondItem="whW-Qk-DKL" secondAttribute="trailing" id="th0-Eu-fCv"/>
                                             <constraint firstAttribute="bottom" secondItem="QDn-pb-ssk" secondAttribute="bottom" id="vKX-dY-dmS"/>
-                                            <constraint firstItem="Ovi-0t-PIE" firstAttribute="width" secondItem="rk5-kO-0KW" secondAttribute="width" id="yGi-2u-slN"/>
+                                            <constraint firstItem="whW-Qk-DKL" firstAttribute="height" secondItem="bB2-wZ-r6d" secondAttribute="height" id="zYv-x9-e2M"/>
                                             <constraint firstAttribute="bottom" secondItem="QDn-pb-ssk" secondAttribute="bottom" id="zpd-F2-Rg7"/>
                                         </constraints>
                                         <variation key="default">
@@ -3192,14 +3194,14 @@
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="5Z4-xA-PyU">
                                     <rect key="frame" x="266" y="19" width="93" height="33"/>
-                                    <color key="backgroundColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="1" green="0.93732010690789469" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="33" id="aHN-vM-uHv"/>
                                         <constraint firstAttribute="width" constant="93" id="oW0-6s-h4q"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="CenturyGothic-BoldItalic" family="Century Gothic" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="CenturyGothic-Italic" family="Century Gothic" pointSize="17"/>
                                     <state key="normal" title="share.">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleColor" white="0.090056172719999994" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
                                         <action selector="shareButtonClick:" destination="cjb-mC-nZN" eventType="touchUpInside" id="xch-6Q-afj"/>
@@ -3499,14 +3501,6 @@
                                     <action selector="actionJournal:" destination="Ivw-cY-ZL2" eventType="touchUpInside" id="vmL-G7-baG"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5o8-xR-td2">
-                                <rect key="frame" x="0.0" y="20" width="375" height="562"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="Ivw-cY-ZL2" id="Ear-Ua-fqL"/>
-                                    <outlet property="delegate" destination="Ivw-cY-ZL2" id="Iyg-44-r3K"/>
-                                </connections>
-                            </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2IS-sc-oXl" userLabel="Button - Close">
                                 <rect key="frame" x="345" y="23" width="24" height="24"/>
                                 <constraints>
@@ -3518,16 +3512,33 @@
                                     <action selector="actionCloseBlog:" destination="Ivw-cY-ZL2" eventType="touchUpInside" id="boE-mA-2N3"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header" translatesAutoresizingMaskIntoConstraints="NO" id="cMu-X3-H4u" userLabel="header icon Image">
+                                <rect key="frame" x="152" y="30" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="HJh-K3-EXH"/>
+                                    <constraint firstAttribute="height" constant="70" id="cKx-A6-WSs"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5o8-xR-td2">
+                                <rect key="frame" x="0.0" y="110" width="375" height="472"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Ivw-cY-ZL2" id="Ear-Ua-fqL"/>
+                                    <outlet property="delegate" destination="Ivw-cY-ZL2" id="Iyg-44-r3K"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="5o8-xR-td2" firstAttribute="top" secondItem="cMu-X3-H4u" secondAttribute="bottom" constant="10" id="2oQ-Yt-r23"/>
                             <constraint firstAttribute="trailing" secondItem="2IS-sc-oXl" secondAttribute="trailing" constant="6" id="A2c-xT-CMI"/>
+                            <constraint firstItem="cMu-X3-H4u" firstAttribute="top" secondItem="G6p-2F-iVc" secondAttribute="bottom" constant="10" id="DZX-PJ-D2V"/>
                             <constraint firstItem="U9q-aG-aPd" firstAttribute="top" secondItem="5o8-xR-td2" secondAttribute="bottom" constant="4" id="Elo-5R-xUt"/>
                             <constraint firstItem="U9q-aG-aPd" firstAttribute="centerX" secondItem="ocs-yC-pEz" secondAttribute="centerX" id="GZS-LE-bVW"/>
                             <constraint firstAttribute="trailing" secondItem="5o8-xR-td2" secondAttribute="trailing" id="Lht-bg-pTx"/>
                             <constraint firstItem="5o8-xR-td2" firstAttribute="leading" secondItem="ocs-yC-pEz" secondAttribute="leading" id="Lku-W9-FXZ"/>
                             <constraint firstItem="DKk-mD-eCk" firstAttribute="top" secondItem="U9q-aG-aPd" secondAttribute="bottom" constant="36" id="OZf-nx-ViU"/>
-                            <constraint firstItem="5o8-xR-td2" firstAttribute="top" secondItem="ocs-yC-pEz" secondAttribute="top" constant="20" id="PDy-fP-tuZ"/>
+                            <constraint firstItem="cMu-X3-H4u" firstAttribute="centerX" secondItem="ocs-yC-pEz" secondAttribute="centerX" id="QKn-50-a3X"/>
                             <constraint firstItem="2IS-sc-oXl" firstAttribute="top" secondItem="G6p-2F-iVc" secondAttribute="bottom" constant="3" id="XuQ-Bi-Fsd"/>
                         </constraints>
                     </view>
@@ -5104,9 +5115,22 @@ your location</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dr3-gA-fi4">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dr3-gA-fi4" customClass="MGLMapView">
                                 <rect key="frame" x="0.0" y="107" width="375" height="560"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LWB-ta-Yq3">
+                                        <rect key="frame" x="20" y="13" width="88" height="30"/>
+                                        <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="12"/>
+                                        <state key="normal" title="SNAP TO ROAD">
+                                            <color key="titleColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="selected">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="actionSnapToRoad:" destination="urt-OB-MFD" eventType="touchUpInside" id="S5e-fR-ngC"/>
+                                        </connections>
+                                    </button>
                                     <tableView hidden="YES" clipsSubviews="YES" alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="y9C-Sg-Uxz">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="560"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5135,7 +5159,7 @@ your location</string>
                                         </connections>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00KM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="laF-yX-7rC">
                                 <rect key="frame" x="128" y="583" width="120" height="45"/>
@@ -5148,19 +5172,6 @@ your location</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LWB-ta-Yq3">
-                                <rect key="frame" x="20" y="120" width="88" height="30"/>
-                                <fontDescription key="fontDescription" name="CenturyGothic-Bold" family="Century Gothic" pointSize="12"/>
-                                <state key="normal" title="SNAP TO ROAD">
-                                    <color key="titleColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <state key="selected">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="actionSnapToRoad:" destination="urt-OB-MFD" eventType="touchUpInside" id="S5e-fR-ngC"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FTs-rl-gsY" userLabel="View - Top">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
                                 <subviews>
@@ -5282,6 +5293,7 @@ your location</string>
         <image name="event8.png" width="128" height="128"/>
         <image name="eye106.png" width="50" height="50"/>
         <image name="gray_close.png" width="120" height="120"/>
+        <image name="header" width="107" height="107"/>
         <image name="invitation-envelope.png" width="50" height="50"/>
         <image name="list40.png" width="50" height="50"/>
         <image name="login_bg.png" width="750" height="1332"/>

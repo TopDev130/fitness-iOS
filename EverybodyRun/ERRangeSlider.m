@@ -41,7 +41,7 @@ static const CGFloat kLabelsFontSize = 11.0f;
     _maxDistance = -1;
     
     _enableStep = NO;
-    _step = 0.1f;
+    _step = 0.25f;  ///
     
     //draw the slider line
     self.sliderLine = [CALayer layer];
@@ -176,10 +176,47 @@ static const CGFloat kLabelsFontSize = 11.0f;
         return;
     }
     
-    NSNumberFormatter *formatter = (self.numberFormatterOverride != nil) ? self.numberFormatterOverride : self.decimalNumberFormatter;
+//    NSNumberFormatter *formatter = (self.numberFormatterOverride != nil) ? self.numberFormatterOverride : self.decimalNumberFormatter;
     
-    self.minLabel.string = [formatter stringFromNumber:@(self.selectedMinimum)];
-    self.maxLabel.string = [formatter stringFromNumber:@(self.selectedMaximum)];
+//    self.minLabel.string = [formatter stringFromNumber:@(self.selectedMinimum)];
+//    self.maxLabel.string = [formatter stringFromNumber:@(self.selectedMaximum)];
+
+    ///
+    float sec_tmp=self.selectedMinimum-(int)self.selectedMinimum;
+    int second = sec_tmp * 60;
+    
+    NSString *str_sec = [[NSString alloc] init];
+    
+    if (second < 10) {
+        str_sec = [NSString stringWithFormat:@"0%d", second];
+    } else {
+        str_sec = [NSString stringWithFormat:@"%d", second];
+    }
+    
+    if (self.selectedMinimum<10) {
+        self.minLabel.string = [NSString stringWithFormat:@"0%@:%@",[NSString stringWithFormat:@"%d",(int)self.selectedMinimum], str_sec];
+    } else {
+        self.minLabel.string = [NSString stringWithFormat:@"%@:%@",[NSString stringWithFormat:@"%d",(int)self.selectedMinimum], str_sec];
+    }
+    
+ 
+    sec_tmp = self.selectedMaximum-(int)self.selectedMaximum;
+    second = sec_tmp * 60;
+
+    if (second < 10) {
+        str_sec = [NSString stringWithFormat:@"0%d", second];
+    } else {
+        str_sec = [NSString stringWithFormat:@"%d", second];
+    }
+
+    if (self.selectedMaximum<10) {
+        self.maxLabel.string = [NSString stringWithFormat:@"0%@:%@",[NSString stringWithFormat:@"%d",(int)self.selectedMaximum], str_sec];
+    } else {
+        self.maxLabel.string = [NSString stringWithFormat:@"%@:%@",[NSString stringWithFormat:@"%d",(int)self.selectedMaximum], str_sec];
+    }
+    
+    NSLog(@"min label=%@", self.minLabel.string);
+    NSLog(@"max label=%@", self.maxLabel.string);
 }
 
 #pragma mark - Set Positions
@@ -314,6 +351,10 @@ static const CGFloat kLabelsFontSize = 11.0f;
     
     //multiply that percentage by self.maxValue to get the new selected minimum value
     float selectedValue = percentage * (self.maxValue - self.minValue) + self.minValue;
+    int multi_val = selectedValue / self.step;
+    
+    selectedValue = multi_val * self.step;
+//    selectedValue = selectedValue * 
     
     if (self.leftHandleSelected)
     {

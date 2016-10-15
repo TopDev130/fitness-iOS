@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[Event isExpire:]:Event.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.expire_date">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HomeViewController allDateFilter]:HomeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[AppEngine sharedInstance].filterDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HomeViewController refreshMapView]:HomeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[NSDate date]">
+            </PersistentString>
+            <PersistentString
+               value = "[AppEngine sharedInstance].filterDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HomeViewController todayFilter]:HomeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[AppEngine sharedInstance].filterDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

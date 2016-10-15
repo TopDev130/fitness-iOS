@@ -689,6 +689,9 @@
 		F84CAD561C916D1000FF24F6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				F8276B421C90A524008D1B76 /* AttendUserList */,
+				F83C6E361C61ACA6009604D7 /* Map */,
+				D3D90CEB1CFBD9AC00699CD8 /* Blog */,
 				F84CAD5A1C916D4700FF24F6 /* SettingsViewController.h */,
 				F84CAD5B1C916D4700FF24F6 /* SettingsViewController.m */,
 				F84CAD5D1C91700900FF24F6 /* SettingsTableViewCell.h */,
@@ -885,12 +888,10 @@
 				F86703651C5C646800D0D9DA /* HomeViewController.h */,
 				F86703661C5C646800D0D9DA /* HomeViewController.m */,
 				D38A37E31CF2F7DC0038157E /* CustomCells */,
-				D38B65221CEF135100BC15D8 /* Events */,
 				D38A37E21CF2F7C60038157E /* Create Event */,
+				D38B65221CEF135100BC15D8 /* Events */,
 				F89465871CC475CF007F4BC5 /* WebViewController.h */,
 				F89465881CC475CF007F4BC5 /* WebViewController.m */,
-				F8276B421C90A524008D1B76 /* AttendUserList */,
-				F83C6E361C61ACA6009604D7 /* Map */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -898,8 +899,8 @@
 		F87D1A461C5E4DE80049EEE1 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				F87D1A471C5E4DF70049EEE1 /* BaseViewController.h */,
 				F87D1A481C5E4DF70049EEE1 /* BaseViewController.m */,
+				F87D1A471C5E4DF70049EEE1 /* BaseViewController.h */,
 				F84880261C92623100C963F6 /* ShareViewController.h */,
 				F84880271C92623100C963F6 /* ShareViewController.m */,
 			);
@@ -939,7 +940,6 @@
 				F87D1A461C5E4DE80049EEE1 /* Base */,
 				F867035C1C5C5B8700D0D9DA /* Auth */,
 				F86703641C5C645800D0D9DA /* Home */,
-				D3D90CEB1CFBD9AC00699CD8 /* Blog */,
 				F84CAD561C916D1000FF24F6 /* Settings */,
 				D38435221CEEA99F0077F763 /* Profile */,
 				D3D89E901CEDD3C6001694E2 /* Notification */,
@@ -1296,8 +1296,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Giles (WEDT7M3DZ6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mike Giles (WEDT7M3DZ6)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ciele Athletics Inc (5YR59GC7G5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ciele Athletics Inc (5YR59GC7G5)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1319,7 +1319,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "b8b386e4-34d4-4c45-848d-ecb972472003";
+				PROVISIONING_PROFILE = "795d7d56-093f-4e57-a96b-3f4ef3644c70";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1341,8 +1341,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Giles (WEDT7M3DZ6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mike Giles (WEDT7M3DZ6)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ciele Athletics Inc (5YR59GC7G5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ciele Athletics Inc (5YR59GC7G5)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1357,7 +1357,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "b8b386e4-34d4-4c45-848d-ecb972472003";
+				PROVISIONING_PROFILE = "795d7d56-093f-4e57-a96b-3f4ef3644c70";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1369,8 +1369,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = EverybodyRun/EverybodyRun.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Giles (WEDT7M3DZ6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mike Giles (WEDT7M3DZ6)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ciele Athletics Inc (5YR59GC7G5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ciele Athletics Inc (5YR59GC7G5)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1384,7 +1384,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.everybody.run1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b8b386e4-34d4-4c45-848d-ecb972472003";
+				PROVISIONING_PROFILE = "795d7d56-093f-4e57-a96b-3f4ef3644c70";
 			};
 			name = Debug;
 		};
@@ -1394,8 +1394,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = EverybodyRun/EverybodyRun.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Giles (WEDT7M3DZ6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mike Giles (WEDT7M3DZ6)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ciele Athletics Inc (5YR59GC7G5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ciele Athletics Inc (5YR59GC7G5)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1409,7 +1409,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.everybody.run1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b8b386e4-34d4-4c45-848d-ecb972472003";
+				PROVISIONING_PROFILE = "795d7d56-093f-4e57-a96b-3f4ef3644c70";
 			};
 			name = Release;
 		};

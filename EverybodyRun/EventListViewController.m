@@ -174,6 +174,17 @@
     return YES;
 }
 
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerLeftUtilityButtonWithIndex:(NSInteger)index
+{
+    switch (index) {
+        case 0:
+            NSLog(@"send notification button clicked!");
+            break;
+            
+        default:
+            break;
+    }
+}
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
 {
@@ -382,6 +393,7 @@
         cell.delegate = self;
         cell.dataDelegate = self;
         [cell setRightUtilityButtons: [self rightButtons: dataObject.event]  WithButtonWidth: 55.0];
+        [cell setLeftUtilityButtons:[self leftButtons] WithButtonWidth:45];
 
         [cell updateEvent: dataObject.event];
         return cell;
@@ -395,6 +407,17 @@
     }
     
     return nil;
+}
+
+- (NSArray *) leftButtons {
+    NSMutableArray *leftUtilityButtons = [NSMutableArray new];
+    [leftUtilityButtons sw_addUtilityButtonWithColor:[UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0] title:@"MSG"];
+    //Set Fonts.
+    for(UIButton* btn in leftUtilityButtons)
+    {
+        [btn.titleLabel setFont: [UIFont fontWithName: @"CenturyGothic" size: 11.0]];
+    }
+    return leftUtilityButtons;
 }
 
 - (NSArray*) rightButtons: (Event*) e

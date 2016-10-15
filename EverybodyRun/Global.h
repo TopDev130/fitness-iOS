@@ -52,7 +52,7 @@
 
 #define     MAP_BOX_TOKEN                       @"pk.eyJ1IjoiY2llbGVhdGhsZXRpY3MiLCJhIjoiY2lxZWc0bXFvMDA4MGh6bWMyaDR5Mjk4ZCJ9.nb1vdG1hf9rseEsUeybKEw"
 
-#define     IMAGE_COMPRESSION_RATE              0.5
+#define     IMAGE_COMPRESSION_RATE              0.9
 #define     MAP_TYPE_DEFAULT_URL                @"mapbox://styles/cieleathletics/ciqe74dra0007cnks6jhu5dcd"
 #define     MAP_TYPE_SAT_URL                    @"mapbox://styles/mapbox/satellite-v9"
 #define     MAP_ZOOM_LEVEL                      10

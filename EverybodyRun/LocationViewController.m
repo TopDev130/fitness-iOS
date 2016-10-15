@@ -56,6 +56,12 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
                                           action:@selector(handleLongPress:)];
     lpgr.minimumPressDuration = 0.5;
     [mvMain addGestureRecognizer:lpgr];
+    
+//    tbList.layer.zPosition = 99;
+//    tbList.allowsSelection = YES;
+//    tbList.delegate = self;
+//    tbList.dataSource = self;
+//    tbList.userInteractionEnabled = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -114,8 +120,9 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
     mvMain.delegate = self;
     mvMain.userTrackingMode = MKUserTrackingModeFollow;
     [viMapContainer addSubview: mvMain];
+    [viMapContainer addSubview:tbList];
 
-    if(_locationType == LOCATION_CURRENT)
+    if(_locationType == LOCATION_CURRENT)  ///
     {
         if([_arrRoute count] == 0)
         {
@@ -128,6 +135,7 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
             [arrPins addObject: mAnnot];
             [mvMain addAnnotation: mAnnot];
             [self updateAddress];
+            
         }
     }
 
@@ -244,8 +252,7 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
         return;
     
     CGPoint touchPoint = [gestureRecognizer locationInView: mvMain];
-    CLLocationCoordinate2D touchMapCoordinate =
-    [mvMain convertPoint:touchPoint toCoordinateFromView: mvMain];
+    CLLocationCoordinate2D touchMapCoordinate = [mvMain convertPoint:touchPoint toCoordinateFromView: mvMain];
     
     BasicMapAnnotation* mAnnot = [[BasicMapAnnotation alloc] init];
     mAnnot.coordinate = touchMapCoordinate;
@@ -400,6 +407,17 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
     [mvMain setCenterCoordinate:placemark.location.coordinate
                       zoomLevel:MAP_ZOOM_LEVEL
                        animated:NO];
+    
+    BasicMapAnnotation* mAnnot = [[BasicMapAnnotation alloc] init];                     ///
+    mAnnot.coordinate = placemark.location.coordinate;                                  ///
+    mAnnot.mIndex = [self getNextAnnoIndex];                                            ///
+    mAnnot.title = PIN_TOP_MESSAGE;                                                     ///
+    mAnnot.hidden = NO;                                                                 ///
+    mAnnot.mKey = [NSString stringWithFormat: @"%@%d", LOCATION_PIN, mAnnot.mIndex];    ///
+    [arrPins addObject: mAnnot];                                                        ///
+    [mvMain addAnnotation:mAnnot];                                                      ///
+
+//    [mvMain addAnnotation:placemark];
 }
 
 - (IBAction) actionSnapToRoad:(id)sender {
@@ -621,6 +639,7 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
                                             [self handleSearchError:error];
                                         } else {
                                             arrSearchResults = places;
+                                            tbList.userInteractionEnabled = YES;
                                             [tbList reloadData];
                                         }
                                     }];
@@ -674,6 +693,7 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -439,7 +439,7 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
         tbFilterList.hidden = NO;
         calendarContentView.hidden = YES;
         currentFilter = FILTER_TOMORROW;
-        [self tomorrowFilter];
+        [self allDateFilter];
     }
     else
     {
@@ -461,7 +461,7 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
     [self loadEventsFromServer];
 }
 
-- (void) tomorrowFilter
+- (void) allDateFilter
 {
     NSDate *now = [NSDate date];
     int daysToAdd = 1;
@@ -1520,7 +1520,7 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
             
         currentSelectedAnnotation = annotation;
 //        currentSelectedAnnotationView = view;
-        
+
         //Event.
         if ([annotation isKindOfClass:[EventAnnotation class]])
         {
@@ -1929,7 +1929,11 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
         btRunIt.hidden = NO;
         btFullRunIt.hidden = NO;
         
-        lbEventAttendee.text = [NSString stringWithFormat: @"%d Attendee", e.attendees + 1];
+        if (e.attendees>0) {
+            lbEventAttendee.text = [NSString stringWithFormat: @"%d Attendees", e.attendees + 1];
+        } else {
+            lbEventAttendee.text = [NSString stringWithFormat: @"%d Attendee", e.attendees + 1];
+        }
         
         if(e.post_user_id != nil && [e.post_user_id intValue] == [[AppEngine sharedInstance].currentUser.user_id intValue]) {
             [btRunIt setTitle: @"share." forState: UIControlStateNormal];
@@ -2940,12 +2944,6 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
     viMemberOnlyFull.hidden = NO;
     viShopContainer.hidden = YES;
     viShopFullContainer.hidden = YES;
-//    viEventDetailInfoContainer.hidden = NO;
-//    viEventDetailFullInfoContainer.hidden = NO;
-//    viMemberOnlyContainer.hidden = YES;
-//    viMemberOnlyFull.hidden = YES;
-//    viShopContainer.hidden = YES;
-//    viShopFullContainer.hidden = YES;
     
     lbMemberOnlyTitle.text = e.title;
     lbMemberOnlyTitleFull.text = e.title;

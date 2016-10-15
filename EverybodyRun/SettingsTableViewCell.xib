@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -16,7 +16,6 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSn-TF-mxb">
                         <rect key="frame" x="18" y="0.0" width="139" height="43"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="43" id="GBu-Qa-9BV"/>
                             <constraint firstAttribute="width" constant="139" id="eBA-fa-Udw"/>
@@ -27,7 +26,6 @@
                     </label>
                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tZZ-f5-PZw">
                         <rect key="frame" x="231" y="8" width="126" height="29"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="126" id="fRX-gK-gLe"/>
                             <constraint firstAttribute="height" constant="28" id="iQV-Ex-ZPc"/>
@@ -42,7 +40,6 @@
                         </connections>
                     </segmentedControl>
                 </subviews>
-                <animations/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="tZZ-f5-PZw" secondAttribute="trailing" constant="18" id="Zhd-j3-JFJ"/>
                     <constraint firstItem="pSn-TF-mxb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="dpH-i0-LAj"/>
@@ -50,7 +47,6 @@
                     <constraint firstItem="pSn-TF-mxb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="spm-1p-8qj"/>
                 </constraints>
             </tableViewCellContentView>
-            <animations/>
             <connections>
                 <outlet property="lbTitle" destination="pSn-TF-mxb" id="vl5-rG-QGL"/>
                 <outlet property="seType" destination="tZZ-f5-PZw" id="gts-xF-5vp"/>
