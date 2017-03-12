@@ -103,6 +103,11 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint         *constraintCalendarHeaderHeight;
 
 //Top Header View.
+@property (weak, nonatomic) IBOutlet UIView *unReadNotificationUIView;
+@property (weak, nonatomic) IBOutlet UIView *unReadBlogUIView;
+@property (weak, nonatomic) IBOutlet UIButton *blogMenuButton;
+@property (weak, nonatomic) IBOutlet UILabel *lbUnreadBlog;
+@property (weak, nonatomic) IBOutlet UILabel *lbUnreadNotification;
 @property (nonatomic, weak) IBOutlet UITableView                *tbList;
 @property (nonatomic, weak) IBOutlet UIView                     *viTop;
 @property (nonatomic, weak) IBOutlet UITextField                *tfSearchAddress;
@@ -256,6 +261,9 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateUnreadBlog) name:@"unreadBlogNotification" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateUnreadNotification) name:@"unReadEventNotification" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateRightMenuButton:) name:@"localizedBlogNotification" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -348,6 +356,11 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
     
     //Init Full Screen
     [self initFullScreen];
+    
+    _lbUnreadBlog.text = [NSString stringWithFormat:@"%d",[AppEngine sharedInstance].currentUser.unread_blog_num];
+    _lbUnreadNotification.text = [NSString stringWithFormat:@"%d", [AppEngine sharedInstance].currentUser.unread_notification_num];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = [AppEngine sharedInstance].currentUser.unread_notification_num;
+
 }
 
 - (void) changedDistanceUnit
@@ -375,6 +388,24 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
         styleURL = [NSURL URLWithString: MAP_TYPE_SAT_URL];
     }
     clusterMapView.styleURL = styleURL;
+
+    [self loadNotification];
+}
+
+- (void)loadNotification {
+    [[NetworkClient sharedClient] getNotifications: [AppEngine sharedInstance].currentUser.user_id success:^(NSArray *array) {
+        [AppEngine sharedInstance].currentUser.unread_notification_num = (int)[array count];
+        if ([array count]==0) {
+            self.unReadNotificationUIView.hidden = YES;
+        } else {
+            self.unReadNotificationUIView.hidden = NO;
+            [UIApplication sharedApplication].applicationIconBadgeNumber = (int)[array count];
+        }
+        _lbUnreadNotification.text = [NSString stringWithFormat:@"%d", [AppEngine sharedInstance].currentUser.unread_notification_num];
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -387,7 +418,7 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
 - (void) initFilter
 {
     [AppEngine sharedInstance].filterDate = [NSDate date];
-    currentFilter = FILTER_TODAY;
+    currentFilter = FILTER_TOMORROW;
     [self updateFilterUI];
     
     arrFilterTypes = @[@{@"icon": @"event_item", @"sel_icon": @"event_item",  @"title": @"Event"},
@@ -702,6 +733,7 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
                                           success:^(NSDictionary *responseObject) {
                                               
                                               [arrOrganizingEvents removeAllObjects];
+                                              
                                               if([[responseObject allKeys] containsObject: @"data"])
                                               {
                                                   NSDictionary* dicData = responseObject[@"data"];
@@ -729,6 +761,7 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
                                               NSLog(@"get my events error = %@", error);
                                               [self loadMemberOnlyEvents];
                                           }];
+
     }
     else {
         [self loadMemberOnlyEvents];
@@ -776,6 +809,34 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
      }];
 }
 
+- (void) updateUnreadBlog {
+    NSLog(@"++++++");
+    _lbUnreadBlog.text = [NSString stringWithFormat:@"%d",[AppEngine sharedInstance].currentUser.unread_blog_num];
+}
+
+- (void) updateUnreadNotification {
+    NSLog(@"$$$$$$");
+    int notificationCount = [AppEngine sharedInstance].currentUser.unread_notification_num;
+    if (notificationCount != 0) {
+        self.unReadNotificationUIView.hidden = NO;
+    } else {
+        self.unReadNotificationUIView.hidden = YES;
+    }
+    _lbUnreadNotification.text = [NSString stringWithFormat:@"%d",[AppEngine sharedInstance].currentUser.unread_notification_num];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = [AppEngine sharedInstance].currentUser.unread_notification_num;
+}
+
+- (void) updateRightMenuButton:(NSNotification *) notification {
+    
+    NSLog(@"-----");
+    BOOL isLocalBlog = [[notification.userInfo valueForKey:@"isLocalBlog"] intValue];
+    
+    if (isLocalBlog) {
+        self.blogMenuButton.imageView.image = [UIImage imageNamed:@"green_blog_icon"];
+    } else {
+        self.blogMenuButton.imageView.image = [UIImage imageNamed:@"blog_icon"];
+    }
+}
 
 - (void) loadMyAttendData
 {
@@ -784,6 +845,7 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
                                              success:^(NSDictionary *responseObject) {
                                                  
                                                  [SVProgressHUD dismiss];
+//                                                 self.lbUnreadBlog.text = [NSString stringWithFormat:@"%d",[AppEngine sharedInstance].currentUser.unread_blog_num];
                                                  int success = [[responseObject valueForKey: @"success"] intValue];
                                                  if(success == 1 && [responseObject[@"data"] isKindOfClass:[NSDictionary class]])
                                                  {
@@ -1307,6 +1369,36 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
                 needToAdd = YES;
             }
             
+            ///
+            NSDate* expireDate = [NSDate dateWithTimeIntervalSince1970: e.expire_date];
+            
+            unsigned int flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
+            NSCalendar* calendar = [NSCalendar currentCalendar];
+            
+            NSDateComponents* expiredcomponents = [calendar components:flags fromDate:expireDate];
+            NSDate* expiredDate = [calendar dateFromComponents:expiredcomponents];
+            
+            NSDateComponents* nowcomponents = [calendar components:flags fromDate:[NSDate date]];
+            NSDate *nowDate = [calendar dateFromComponents:nowcomponents];
+            
+            if (currentFilter==FILTER_TODAY) {
+                NSComparisonResult result = [expiredDate compare:nowDate];
+                if (result != NSOrderedSame)
+                {
+                    needToAdd = NO;
+                }
+            }
+            
+            NSDateComponents* daycomponents = [calendar components:flags fromDate:[AppEngine sharedInstance].filterDate];
+            NSDate *filterDate = [calendar dateFromComponents:daycomponents];
+
+            if (currentFilter==FILTER_DATE) {
+                NSComparisonResult result = [expiredDate compare:filterDate];
+                if (result != NSOrderedSame) {
+                    needToAdd = NO;
+                }
+            }
+            
             if(needToAdd)
             {
                 if(currentCategory == FILTER_ALL || currentCategory == FILTER_EVENT) {
@@ -1772,6 +1864,15 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
         [arrAllEvents addObject: e];
     }
     
+    [[NetworkClient sharedClient] getNotifications: [AppEngine sharedInstance].currentUser.user_id success:^(NSArray *array) {
+        [AppEngine sharedInstance].currentUser.unread_notification_num = (int)[array count];
+        [NSString stringWithFormat:@"%d", [AppEngine sharedInstance].currentUser.unread_notification_num];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+
+    
     [self refreshMapView];
 }
 
@@ -1806,7 +1907,15 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
             break;
         }
     }
-    
+
+    [[NetworkClient sharedClient] getNotifications: [AppEngine sharedInstance].currentUser.user_id success:^(NSArray *array) {
+        [AppEngine sharedInstance].currentUser.unread_notification_num = (int)[array count];
+        [NSString stringWithFormat:@"%d", [AppEngine sharedInstance].currentUser.unread_notification_num];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+
     [[CoreHelper sharedInstance] deleteEvent: event_id];
     [self refreshMapView];
 }
@@ -1940,6 +2049,8 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
             [btFullRunIt setTitle: @"share." forState: UIControlStateNormal];
             btRunIt.backgroundColor = COLOR_GREEN_BTN;
             btFullRunIt.backgroundColor = COLOR_GREEN_BTN;
+//            [btRunIt setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1] forState: UIControlStateNormal];
+//            [btFullRunIt setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1] forState: UIControlStateNormal];
             
             btAddImages.hidden = NO;
             lbAddImages.hidden = NO;
@@ -1950,6 +2061,8 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
                 [btFullRunIt setTitle: @"share." forState: UIControlStateNormal];
                 btRunIt.backgroundColor = COLOR_GREEN_BTN;
                 btFullRunIt.backgroundColor = COLOR_GREEN_BTN;
+//                [btRunIt setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1] forState: UIControlStateNormal];
+//                [btFullRunIt setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1] forState: UIControlStateNormal];
                 
             } else {
                 [btRunIt setTitle: @"cancel." forState: UIControlStateNormal];
@@ -2634,7 +2747,7 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
 
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    completeBlock();
+//    completeBlock();
     switch (result)
     {
         case MFMailComposeResultCancelled:

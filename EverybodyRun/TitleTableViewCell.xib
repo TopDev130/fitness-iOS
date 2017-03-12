@@ -1,15 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="GOTHIC.TTF">
+        <array key="GOTHIC.TTF">
             <string>CenturyGothic</string>
-            <string>CenturyGothic</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -35,11 +38,12 @@
                             <constraint firstAttribute="height" constant="21" id="zta-fb-Zmo"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="14"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpT-OB-m1n">
                         <rect key="frame" x="304" y="0.0" width="71" height="43"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <connections>
                             <action selector="actionAttendees:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="RNA-rV-9e6"/>
                         </connections>
@@ -53,7 +57,7 @@
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2KS-BG-rML" userLabel="View - Line">
                         <rect key="frame" x="0.0" y="42" width="375" height="1"/>
-                        <color key="backgroundColor" red="0.36470588235294116" green="0.85882352941176465" blue="0.36470588235294116" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.36470588235294116" green="0.85882352941176465" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="fSG-jD-3da"/>
                         </constraints>
@@ -65,11 +69,11 @@
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="h6y-1b-MmK"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="J58-yB-GxY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="ERN-QN-fh8"/>
                     <constraint firstItem="JoA-6f-g7i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="EU5-EX-ePU"/>

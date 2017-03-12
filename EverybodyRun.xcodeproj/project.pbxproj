@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		820F8EF81E60339600284D2C /* remove_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 820F8EF71E60339600284D2C /* remove_back.png */; };
+		82CD34E01E6A07D60072FDBB /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82CD34DF1E6A07D60072FDBB /* UserNotifications.framework */; };
 		8E7EB1624F99756CB8E53738 /* libPods-EverybodyRun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 220F472393AAB8F2A5DA06BD /* libPods-EverybodyRun.a */; };
 		D3710C591CED6A2F008B341A /* login_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D3710C581CED6A2F008B341A /* login_bg.png */; };
 		D3710C5C1CED6C0D008B341A /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3710C5B1CED6C0D008B341A /* StartViewController.m */; };
@@ -190,12 +192,14 @@
 		F8B681A21D4F4BD50006B687 /* ERImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B681A11D4F4BD50006B687 /* ERImageView.m */; };
 		F8BD417E1D0DB41400CB39DA /* ClusterAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BD417D1D0DB41400CB39DA /* ClusterAnnotationView.m */; };
 		F8CF4E991C6EC4F20053AFBA /* btn_gray_back.png in Resources */ = {isa = PBXBuildFile; fileRef = F8CF4E981C6EC4F20053AFBA /* btn_gray_back.png */; };
-		F8F150691CD3D2FD006FC7E9 /* Pushwoosh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8F150681CD3D2FD006FC7E9 /* Pushwoosh.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1403589956F97761B14835D5 /* Pods-EverybodyRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EverybodyRun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EverybodyRun/Pods-EverybodyRun.debug.xcconfig"; sourceTree = "<group>"; };
 		220F472393AAB8F2A5DA06BD /* libPods-EverybodyRun.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EverybodyRun.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		820F8EF71E60339600284D2C /* remove_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remove_back.png; sourceTree = "<group>"; };
+		82CD34DF1E6A07D60072FDBB /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		82CD34E11E6A07DF0072FDBB /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		99CE3BB67A42DE55619ED5DF /* Pods-EverybodyRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EverybodyRun.release.xcconfig"; path = "Pods/Target Support Files/Pods-EverybodyRun/Pods-EverybodyRun.release.xcconfig"; sourceTree = "<group>"; };
 		D3710C581CED6A2F008B341A /* login_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_bg.png; sourceTree = "<group>"; };
 		D3710C5A1CED6C0D008B341A /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
@@ -438,7 +442,6 @@
 		F8BD417C1D0DB41400CB39DA /* ClusterAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClusterAnnotationView.h; sourceTree = "<group>"; };
 		F8BD417D1D0DB41400CB39DA /* ClusterAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClusterAnnotationView.m; sourceTree = "<group>"; };
 		F8CF4E981C6EC4F20053AFBA /* btn_gray_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_gray_back.png; sourceTree = "<group>"; };
-		F8F150681CD3D2FD006FC7E9 /* Pushwoosh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pushwoosh.framework; path = Helper/Pushwoosh.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -446,6 +449,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82CD34E01E6A07D60072FDBB /* UserNotifications.framework in Frameworks */,
 				F840B9871C8689F30063084C /* CoreGraphics.framework in Frameworks */,
 				F8515E661C891B74002E7B72 /* libsqlite3.tbd in Frameworks */,
 				F8515E641C891B6A002E7B72 /* CFNetwork.framework in Frameworks */,
@@ -457,7 +461,6 @@
 				F840B9811C8689DC0063084C /* libstdc++.tbd in Frameworks */,
 				F840B97F1C8689D20063084C /* libz.tbd in Frameworks */,
 				F840B97D1C8689990063084C /* AVFoundation.framework in Frameworks */,
-				F8F150691CD3D2FD006FC7E9 /* Pushwoosh.framework in Frameworks */,
 				F840B97B1C8689920063084C /* ImageIO.framework in Frameworks */,
 				F840B9791C8689890063084C /* SystemConfiguration.framework in Frameworks */,
 				F840B9771C8689800063084C /* CoreLocation.framework in Frameworks */,
@@ -508,10 +511,10 @@
 		D38A37E21CF2F7C60038157E /* Create Event */ = {
 			isa = PBXGroup;
 			children = (
-				F87CB3021C5F670100F80BF8 /* CreateEventViewController.h */,
-				F87CB3031C5F670100F80BF8 /* CreateEventViewController.m */,
 				F84F20981C60AFB5008F363C /* LocationViewController.h */,
 				F84F20991C60AFB5008F363C /* LocationViewController.m */,
+				F87CB3021C5F670100F80BF8 /* CreateEventViewController.h */,
+				F87CB3031C5F670100F80BF8 /* CreateEventViewController.m */,
 			);
 			name = "Create Event";
 			sourceTree = "<group>";
@@ -570,6 +573,8 @@
 		DE560203C3D7B172911251A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				82CD34E11E6A07DF0072FDBB /* UserNotificationsUI.framework */,
+				82CD34DF1E6A07D60072FDBB /* UserNotifications.framework */,
 				F8A23BCF1D3D1D1800C68DB0 /* Fabric.framework */,
 				F8A23BD01D3D1D1800C68DB0 /* Mapbox.framework */,
 				F8A23BD31D3D1D2700C68DB0 /* Mapbox.bundle */,
@@ -662,7 +667,6 @@
 		F8421D091C5F01BA006DC457 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				F8F150681CD3D2FD006FC7E9 /* Pushwoosh.framework */,
 				F8515E521C891AAC002E7B72 /* ASWClientManager */,
 				F8515E591C891AAC002E7B72 /* AWS */,
 				F8421D0A1C5F01C5006DC457 /* CoreHelper.h */,
@@ -689,9 +693,6 @@
 		F84CAD561C916D1000FF24F6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				F8276B421C90A524008D1B76 /* AttendUserList */,
-				F83C6E361C61ACA6009604D7 /* Map */,
-				D3D90CEB1CFBD9AC00699CD8 /* Blog */,
 				F84CAD5A1C916D4700FF24F6 /* SettingsViewController.h */,
 				F84CAD5B1C916D4700FF24F6 /* SettingsViewController.m */,
 				F84CAD5D1C91700900FF24F6 /* SettingsTableViewCell.h */,
@@ -785,6 +786,7 @@
 		F86703531C5C554C00D0D9DA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				820F8EF71E60339600284D2C /* remove_back.png */,
 				D3D3BF4E1D19A29800B0C013 /* weblink_icon.png */,
 				F89542E61D0F444300B6FB24 /* event_item.png */,
 				D3BDAC601CFCB0CA00144A97 /* circle_close.png */,
@@ -887,11 +889,13 @@
 			children = (
 				F86703651C5C646800D0D9DA /* HomeViewController.h */,
 				F86703661C5C646800D0D9DA /* HomeViewController.m */,
+				F89465881CC475CF007F4BC5 /* WebViewController.m */,
+				F89465871CC475CF007F4BC5 /* WebViewController.h */,
+				F83C6E361C61ACA6009604D7 /* Map */,
+				F8276B421C90A524008D1B76 /* AttendUserList */,
+				D38B65221CEF135100BC15D8 /* Events */,
 				D38A37E31CF2F7DC0038157E /* CustomCells */,
 				D38A37E21CF2F7C60038157E /* Create Event */,
-				D38B65221CEF135100BC15D8 /* Events */,
-				F89465871CC475CF007F4BC5 /* WebViewController.h */,
-				F89465881CC475CF007F4BC5 /* WebViewController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -899,8 +903,8 @@
 		F87D1A461C5E4DE80049EEE1 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				F87D1A481C5E4DF70049EEE1 /* BaseViewController.m */,
 				F87D1A471C5E4DF70049EEE1 /* BaseViewController.h */,
+				F87D1A481C5E4DF70049EEE1 /* BaseViewController.m */,
 				F84880261C92623100C963F6 /* ShareViewController.h */,
 				F84880271C92623100C963F6 /* ShareViewController.m */,
 			);
@@ -940,8 +944,9 @@
 				F87D1A461C5E4DE80049EEE1 /* Base */,
 				F867035C1C5C5B8700D0D9DA /* Auth */,
 				F86703641C5C645800D0D9DA /* Home */,
-				F84CAD561C916D1000FF24F6 /* Settings */,
 				D38435221CEEA99F0077F763 /* Profile */,
+				D3D90CEB1CFBD9AC00699CD8 /* Blog */,
+				F84CAD561C916D1000FF24F6 /* Settings */,
 				D3D89E901CEDD3C6001694E2 /* Notification */,
 				F845F3C11C9118F4000F96AD /* Menu */,
 			);
@@ -986,6 +991,9 @@
 						DevelopmentTeam = 5YR59GC7G5;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 							com.apple.SafariKeychain = {
@@ -1058,6 +1066,7 @@
 				F89542E71D0F444300B6FB24 /* event_item.png in Resources */,
 				F848802A1C92702200C963F6 /* instagram_share.png in Resources */,
 				F8A23BD41D3D1D2700C68DB0 /* Mapbox.bundle in Resources */,
+				820F8EF81E60339600284D2C /* remove_back.png in Resources */,
 				F86387191C7AAB1D00D58583 /* navigation-arrow.png in Resources */,
 				F83C6E481C61AE9F009604D7 /* Button_DisclosureAccessory.png in Resources */,
 				F857F6FC1C59594F00E6FA69 /* Assets.xcassets in Resources */,
@@ -1175,7 +1184,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F8566B481D30898100ACDAEF /* ShellScript */ = {
@@ -1319,7 +1328,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "795d7d56-093f-4e57-a96b-3f4ef3644c70";
+				PROVISIONING_PROFILE = "91c874bc-5f2c-45c5-b9a8-70c1847b804f";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1357,7 +1366,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "795d7d56-093f-4e57-a96b-3f4ef3644c70";
+				PROVISIONING_PROFILE = "91c874bc-5f2c-45c5-b9a8-70c1847b804f";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1369,8 +1378,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = EverybodyRun/EverybodyRun.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ciele Athletics Inc (5YR59GC7G5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ciele Athletics Inc (5YR59GC7G5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Giles (WEDT7M3DZ6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Mike Giles (WEDT7M3DZ6)";
+				DEVELOPMENT_TEAM = 5YR59GC7G5;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1384,7 +1394,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.everybody.run1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "795d7d56-093f-4e57-a96b-3f4ef3644c70";
+				PROVISIONING_PROFILE = "15741535-1f20-4107-a103-04f1478c9ce5";
+				PROVISIONING_PROFILE_SPECIFIER = "mike hideo development profile";
 			};
 			name = Debug;
 		};
@@ -1396,6 +1407,7 @@
 				CODE_SIGN_ENTITLEMENTS = EverybodyRun/EverybodyRun.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ciele Athletics Inc (5YR59GC7G5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ciele Athletics Inc (5YR59GC7G5)";
+				DEVELOPMENT_TEAM = 5YR59GC7G5;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1409,7 +1421,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.everybody.run1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "795d7d56-093f-4e57-a96b-3f4ef3644c70";
+				PROVISIONING_PROFILE = "91c874bc-5f2c-45c5-b9a8-70c1847b804f";
+				PROVISIONING_PROFILE_SPECIFIER = "mike hideo adhoc profile";
 			};
 			name = Release;
 		};

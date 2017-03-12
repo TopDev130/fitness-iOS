@@ -14,7 +14,8 @@
 }
 
 @property (nonatomic, weak) IBOutlet UILabel            *lbTitle;
-
+@property (weak, nonatomic) IBOutlet UIView *unReadView;
+@property (weak, nonatomic) IBOutlet UILabel *lbNotificationNum;
 
 - (void) setMenuItem: (NSString*) name;
 + (CGFloat) getHeight;

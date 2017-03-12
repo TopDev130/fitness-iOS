@@ -1,13 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="GOTHIC.TTF">
+        <array key="GOTHIC.TTF">
             <string>CenturyGothic</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -22,17 +28,48 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fz1-1T-eft">
                         <rect key="frame" x="27" y="-1" width="333" height="51"/>
                         <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="16"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5Y-vC-0Zl" userLabel="unread view">
+                        <rect key="frame" x="302" y="16" width="17" height="17"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unread_back" translatesAutoresizingMaskIntoConstraints="NO" id="H4A-IJ-ZkA" userLabel="back image">
+                                <rect key="frame" x="0.0" y="0.0" width="17" height="17"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fl6-ax-sjw" userLabel="label">
+                                <rect key="frame" x="0.0" y="1" width="17" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="H4A-IJ-ZkA" firstAttribute="centerY" secondItem="B5Y-vC-0Zl" secondAttribute="centerY" id="5xX-qW-0YQ"/>
+                            <constraint firstItem="H4A-IJ-ZkA" firstAttribute="width" secondItem="B5Y-vC-0Zl" secondAttribute="width" id="8I6-Jo-2rT"/>
+                            <constraint firstItem="H4A-IJ-ZkA" firstAttribute="height" secondItem="B5Y-vC-0Zl" secondAttribute="height" id="BwA-3w-DDm"/>
+                            <constraint firstItem="Fl6-ax-sjw" firstAttribute="centerX" secondItem="H4A-IJ-ZkA" secondAttribute="centerX" id="Jxc-I8-u4m"/>
+                            <constraint firstItem="H4A-IJ-ZkA" firstAttribute="centerX" secondItem="B5Y-vC-0Zl" secondAttribute="centerX" id="L9v-nY-KXy"/>
+                            <constraint firstItem="Fl6-ax-sjw" firstAttribute="centerY" secondItem="H4A-IJ-ZkA" secondAttribute="centerY" constant="1" id="QJU-hY-8Mq"/>
+                            <constraint firstAttribute="width" constant="17" id="QiM-EM-fZs"/>
+                            <constraint firstItem="Fl6-ax-sjw" firstAttribute="height" secondItem="H4A-IJ-ZkA" secondAttribute="height" id="dVo-7b-50i"/>
+                            <constraint firstItem="Fl6-ax-sjw" firstAttribute="width" secondItem="H4A-IJ-ZkA" secondAttribute="width" id="sC3-SJ-SZ6"/>
+                            <constraint firstAttribute="height" secondItem="B5Y-vC-0Zl" secondAttribute="width" multiplier="1:1" id="yso-8h-TAj"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Fz1-1T-eft" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="P2c-hH-lAW"/>
                     <constraint firstItem="Fz1-1T-eft" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="-1" id="ShH-cJ-Ws3"/>
                     <constraint firstItem="Fz1-1T-eft" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="27" id="VC1-hZ-Gge"/>
+                    <constraint firstItem="B5Y-vC-0Zl" firstAttribute="height" secondItem="B5Y-vC-0Zl" secondAttribute="width" multiplier="1:1" id="cRI-JQ-QtX"/>
                     <constraint firstAttribute="trailing" secondItem="Fz1-1T-eft" secondAttribute="trailing" constant="15" id="fqI-cf-oHm"/>
                     <constraint firstAttribute="trailing" secondItem="Fz1-1T-eft" secondAttribute="trailing" constant="16" id="p4B-82-ts3"/>
                     <constraint firstAttribute="bottom" secondItem="Fz1-1T-eft" secondAttribute="bottom" constant="-1" id="sXv-AG-sgZ"/>
+                    <constraint firstItem="B5Y-vC-0Zl" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" multiplier="0.85" id="wxA-Zw-l62"/>
+                    <constraint firstItem="B5Y-vC-0Zl" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xGQ-VV-dnd"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -42,9 +79,14 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="lbNotificationNum" destination="Fl6-ax-sjw" id="nHv-8y-OLM"/>
                 <outlet property="lbTitle" destination="Fz1-1T-eft" id="d9Y-et-Urc"/>
+                <outlet property="unReadView" destination="B5Y-vC-0Zl" id="Pwe-uP-6ju"/>
             </connections>
             <point key="canvasLocation" x="416.5" y="259"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="unread_back" width="15" height="15"/>
+    </resources>
 </document>

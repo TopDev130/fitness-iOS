@@ -1,14 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="GOTHIC.TTF">
+        <array key="GOTHIC.TTF">
             <string>CenturyGothic</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -20,49 +24,63 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phillip savard just joined your event" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXa-DB-eVB">
-                        <rect key="frame" x="17" y="8" width="262" height="19"/>
-                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q9x-N6-RS5">
-                        <rect key="frame" x="286" y="6" width="24" height="24"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I4e-ch-54z">
+                        <rect key="frame" x="265" y="0.0" width="55" height="43"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="24" id="JgB-uy-kOX"/>
-                            <constraint firstAttribute="height" constant="24" id="Wph-oa-0zv"/>
+                            <constraint firstAttribute="width" constant="55" id="h8u-LL-emE"/>
                         </constraints>
-                        <state key="normal" image="cross.png"/>
+                        <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="12"/>
+                        <state key="normal" title="REMOVE">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
                         <connections>
-                            <action selector="actionDelete:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yNg-mc-0eu"/>
+                            <action selector="actionDelete:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dfr-bq-Rfh"/>
                         </connections>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Rs-ko-wzp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phillip savard just joined your event" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXa-DB-eVB">
+                                <rect key="frame" x="15.5" y="4.5" width="288" height="35"/>
+                                <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mXa-DB-eVB" firstAttribute="width" secondItem="5Rs-ko-wzp" secondAttribute="width" multiplier="0.9" id="DQv-iN-Oek"/>
+                            <constraint firstItem="mXa-DB-eVB" firstAttribute="centerY" secondItem="5Rs-ko-wzp" secondAttribute="centerY" id="G1V-jZ-OYU"/>
+                            <constraint firstItem="mXa-DB-eVB" firstAttribute="height" secondItem="5Rs-ko-wzp" secondAttribute="height" multiplier="0.8" id="gCP-rx-dLD"/>
+                            <constraint firstItem="mXa-DB-eVB" firstAttribute="centerX" secondItem="5Rs-ko-wzp" secondAttribute="centerX" id="ypc-E0-P7l"/>
+                        </constraints>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="piX-nX-HvS" userLabel="View - Line">
                         <rect key="frame" x="0.0" y="43" width="320" height="1"/>
-                        <color key="backgroundColor" red="0.85098039215686272" green="0.85098039215686272" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.85098039215686272" green="0.85098039215686272" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="keW-NP-hWG"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="mXa-DB-eVB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="88E-wb-UXA"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="q9x-N6-RS5" secondAttribute="trailing" constant="2" id="8gT-Ct-1H1"/>
+                    <constraint firstAttribute="bottom" secondItem="5Rs-ko-wzp" secondAttribute="bottom" id="3Ce-B4-hmo"/>
                     <constraint firstAttribute="trailing" secondItem="piX-nX-HvS" secondAttribute="trailing" id="Bbc-5F-RkR"/>
-                    <constraint firstItem="q9x-N6-RS5" firstAttribute="leading" secondItem="mXa-DB-eVB" secondAttribute="trailing" constant="7" id="L8c-dF-R0F"/>
+                    <constraint firstItem="I4e-ch-54z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="FUX-jG-zET"/>
+                    <constraint firstAttribute="trailing" secondItem="5Rs-ko-wzp" secondAttribute="trailing" id="IUX-91-EVm"/>
+                    <constraint firstAttribute="trailing" secondItem="I4e-ch-54z" secondAttribute="trailing" id="Pqe-80-7GV"/>
                     <constraint firstAttribute="bottom" secondItem="piX-nX-HvS" secondAttribute="bottom" constant="-1" id="Rhb-pr-ppI"/>
-                    <constraint firstItem="q9x-N6-RS5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-2" id="Wbb-AP-y5a"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mXa-DB-eVB" secondAttribute="bottom" constant="8" id="a6o-Pd-vpB"/>
+                    <constraint firstItem="5Rs-ko-wzp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ZA0-BY-wPw"/>
                     <constraint firstItem="piX-nX-HvS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ddb-Yg-qXW"/>
-                    <constraint firstItem="mXa-DB-eVB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="vzS-Re-15h"/>
+                    <constraint firstItem="5Rs-ko-wzp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="llh-LL-KjK"/>
+                    <constraint firstItem="piX-nX-HvS" firstAttribute="top" secondItem="I4e-ch-54z" secondAttribute="bottom" id="ug8-1a-YuS"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="lbTitle" destination="mXa-DB-eVB" id="gdu-kj-EGB"/>
+                <outlet property="tailingConstant" destination="IUX-91-EVm" id="Qok-G3-45l"/>
             </connections>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="cross.png" width="47" height="47"/>
-    </resources>
 </document>

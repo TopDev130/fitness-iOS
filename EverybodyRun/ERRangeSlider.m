@@ -215,8 +215,8 @@ static const CGFloat kLabelsFontSize = 11.0f;
         self.maxLabel.string = [NSString stringWithFormat:@"%@:%@",[NSString stringWithFormat:@"%d",(int)self.selectedMaximum], str_sec];
     }
     
-    NSLog(@"min label=%@", self.minLabel.string);
-    NSLog(@"max label=%@", self.maxLabel.string);
+//    NSLog(@"min label=%@", self.minLabel.string);
+//    NSLog(@"max label=%@", self.maxLabel.string);
 }
 
 #pragma mark - Set Positions

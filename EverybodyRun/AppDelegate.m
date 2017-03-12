@@ -14,7 +14,7 @@
 #import <Fabric/Fabric.h>
 #import <Mapbox/Mapbox.h>
 
-@interface AppDelegate () <CLLocationManagerDelegate>
+@interface AppDelegate () <CLLocationManagerDelegate, PushNotificationDelegate>
 {
     CLGeocoder              *geocoder;
     
@@ -26,6 +26,9 @@
 
 @implementation AppDelegate
 @synthesize locationManager;
+
+#define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -74,15 +77,30 @@
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     
-    //-----------PUSHWOOSH PART-----------
-    // handling push on app start
-    [[PushNotificationManager pushManager] handlePushReceived:launchOptions];
     
-    // make sure we count app open in Pushwoosh stats
-    [[PushNotificationManager pushManager] sendAppOpen];
-    
-    // register for push notifications!
-    [[PushNotificationManager pushManager] registerForPushNotifications];
+//    // Checking if app is running iOS 8
+//    if ([application respondsToSelector:@selector(registerForRemoteNotifications)]) {
+//        // Register device for iOS8
+//        UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
+//        [application registerUserNotificationSettings:notificationSettings];
+//        [application registerForRemoteNotifications];
+//    } else {
+//        // Register device for iOS7
+//        [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge];
+//    }
+    if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")){
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+            if(!error){
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+            }
+        }];
+    }
+    else {
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [application registerForRemoteNotifications];
+    }
     
     // check launch notification (optional)
     NSDictionary *launchNotification = [PushNotificationManager pushManager].launchNotification;
@@ -103,6 +121,23 @@
         NSLog(@"No launch notification");
     }
     
+    //-----------PUSHWOOSH PART-----------
+    // set custom delegate for push handling, in our case - view controller
+    [PushNotificationManager pushManager].delegate = self;
+    
+    // set default Pushwoosh delegate for iOS10 foreground push handling
+//    [UNUserNotificationCenter currentNotificationCenter].delegate = [PushNotificationManager pushManager].notificationCenterDelegate;
+    
+    // handling push on app start
+    [[PushNotificationManager pushManager] handlePushReceived:launchOptions];
+    
+    // make sure we count app open in Pushwoosh stats
+    [[PushNotificationManager pushManager] sendAppOpen];
+    
+    // register for push notifications!
+    [[PushNotificationManager pushManager] registerForPushNotifications];
+    
+    [[PushNotificationManager pushManager] startLocationTracking];
     
     return YES;
 }
@@ -134,14 +169,16 @@
 }
 
 // system push notification registration success callback, delegate to pushManager
-- (void)application:(UIApplication *)application
-didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [[PushNotificationManager pushManager] handlePushRegistration:deviceToken];
 
     NSString *deviceTokenString = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     deviceTokenString = [deviceTokenString stringByReplacingOccurrencesOfString:@" " withString:@""];
     [AppEngine sharedInstance].currentDeviceToken = deviceTokenString;
     NSLog(@"device token = %@", [AppEngine sharedInstance].currentDeviceToken);
+    
+//    UIAlertView *alert= [[UIAlertView alloc]initWithTitle:deviceTokenString message:Nil delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+//    [alert show];
 }
 
 // system push notification registration error callback, delegate to pushManager
@@ -150,14 +187,27 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 
 //// system push notifications callback, delegate to pushManager
-//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-//{
-//    [[PushNotificationManager pushManager] handlePushReceived:userInfo];
-//    [[Branch getInstance] handlePushNotification:userInfo];
-//}
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [[PushNotificationManager pushManager] handlePushReceived:userInfo];
+    [[Branch getInstance] handlePushNotification:userInfo];
+}
+    
+- (void)onDidFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+}
+
+
+- (void) onPushAccepted: (PushNotificationManager *)pushManager withNotification:(NSDictionary *)pushNotification onStart:(BOOL)onStart {
+    NSLog(@"Push notification received");
+}
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
+    
+    if (SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")) {
+        NSLog(@"iOS version>=10.0. let notificationcenter handle this one.");
+        return;
+    }
+    
     NSLog(@"Remote Notification Received: %@", userInfo);
     
     [[PushNotificationManager pushManager] handlePushReceived:userInfo];
@@ -168,16 +218,63 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         [self updateEventData: userData];
     }
     
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.alertBody = @"message to be displayed";
-    notification.applicationIconBadgeNumber = 1;
-    
-    [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
     completionHandler(UIBackgroundFetchResultNewData);
+    
+    UIApplicationState state = [application applicationState];
+    
+    if (state == UIApplicationStateActive) {
+        // do stuff when app is active
+    } else {
+        // do stuff when app is in background
+
+    }
+
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    
+    //Called when a notification is delivered to a foreground app.
+    NSLog(@"Remote Notification Received: %@", notification.request.content.userInfo);
+    
+    [[PushNotificationManager pushManager] handlePushReceived:notification.request.content.userInfo];
+    [[Branch getInstance] handlePushNotification:notification.request.content.userInfo];
+    NSDictionary *userData = [[PushNotificationManager pushManager] getCustomPushDataAsNSDict:notification.request.content.userInfo];
+    if(userData != nil)
+    {
+        [self updateEventData: userData];
+    }
+
+    completionHandler(UNNotificationPresentationOptionAlert);
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    
+    //Called to let your app know which action was selected by the user for a given notification.
+    NSLog(@"Userinfo %@", response.notification.request.content.userInfo);
+    NSDictionary *userData = [[PushNotificationManager pushManager] getCustomPushDataAsNSDict:response.notification.request.content.userInfo];
+    if(userData != nil) {
+        [self updateEventData:userData];
+    }
+    completionHandler();
+}
+
+- (void) updateEventNotification {
+    if ([AppEngine sharedInstance].currentUser != nil) {
+        [[NetworkClient sharedClient] getNotifications: [AppEngine sharedInstance].currentUser.user_id success:^(NSArray *array) {
+            [AppEngine sharedInstance].currentUser.unread_notification_num = (int)[array count];
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"unReadEventNotification" object:nil];
+            if ([array count]!=0) {
+                [UIApplication sharedApplication].applicationIconBadgeNumber = (int)[array count];
+            }
+        } failure:^(NSError *error) {
+            
+        }];
+    }
 }
 
 - (void) updateEventData: (NSDictionary*) userData
 {
+
     if(userData != nil && [userData valueForKey: @"event_id"] != nil)
     {
         //Get Single Data.
@@ -206,6 +303,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
                                              } failure:^(NSError *error) {
                                                  
                                              }];
+        [self updateEventNotification];
+
     }
     
 }
@@ -225,6 +324,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     [self updateCurrentUserLocation];
+    [self updateEventNotification];
     if(self.homeView != nil) {
         [(HomeViewController*)self.homeView applicationIsActive];
     }

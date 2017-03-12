@@ -106,11 +106,13 @@
            parameters: parameters
               success:^(id responseObject) {
                  
+                  NSLog(@"user register res=%@", responseObject);
                   success(responseObject);
                   
               } failure:^(NSError *error) {
                   
                   failure(error);
+                
               }];
 }
 
@@ -155,6 +157,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
            parameters: parameters
               success:^(id responseObject) {
                  
+                  NSLog(@"user login res=%@", responseObject);
                   success(responseObject);
                   
               } failure:^(NSError *error) {
@@ -229,6 +232,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
                   
                   NSDictionary* dicUser = responseObject[@"data"][@"user"];
                   if(dicUser != nil) {
+                      NSLog(@"update profile res=%@", responseObject);
                       success();
                   }
                   else {
@@ -286,6 +290,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
                   NSDictionary* dicUser = responseObject[@"data"][@"user"];
                   if(dicUser != nil) {
                       User* u = [[User alloc] initWithDictionary: dicUser];
+                      NSLog(@"update user profile res=%@", responseObject);
                       success(u);
                   }
                   else {
@@ -315,6 +320,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         }
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject)
     {
+        NSLog(@"upload photo res=%@", responseObject);
         success(responseObject);
     }
        failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -370,7 +376,7 @@ allow_invite_request: (BOOL) allow_invite_request
     [self PostRequest: @"event_api/post_event.php"
            parameters: parameters
               success:^(id responseObject) {
-                  
+                  NSLog(@"post event res=%@", responseObject);
                   success(responseObject);
                   
               } failure:^(NSError *error) {
@@ -397,7 +403,7 @@ allow_invite_request: (BOOL) allow_invite_request
     [self PostRequest: @"event_api/get_events.php"
            parameters: parameters
               success:^(id responseObject) {
-                  
+                  NSLog(@"get event res=%@", responseObject);
                   success(responseObject);
                   
               } failure:^(NSError *error) {
@@ -419,7 +425,7 @@ allow_invite_request: (BOOL) allow_invite_request
     [self PostRequest: @"event_api/get_single_event.php"
            parameters: parameters
               success:^(id responseObject) {
-                  
+                  NSLog(@"get single event res=%@", responseObject);
                   BOOL successStatus = [[responseObject valueForKey: @"success"] boolValue];
                   if(successStatus)
                   {
@@ -447,7 +453,7 @@ allow_invite_request: (BOOL) allow_invite_request
     [self PostRequest: @"event_api/get_my_events.php"
            parameters: parameters
               success:^(id responseObject) {
-                  
+                  NSLog(@"get my event res=%@", responseObject);
                   success(responseObject);
                   
               } failure:^(NSError *error) {
@@ -488,7 +494,7 @@ allow_invite_request: (BOOL) allow_invite_request
     [self PostRequest: @"event_api/update_event.php"
            parameters: parameters
               success:^(id responseObject) {
-                  
+                  NSLog(@"update event res=%@", responseObject);
                   success(responseObject);
                   
               } failure:^(NSError *error) {
@@ -510,7 +516,7 @@ allow_invite_request: (BOOL) allow_invite_request
     [self PostRequest: @"event_api/update_asked_expire.php"
            parameters: parameters
               success:^(id responseObject) {
-                  
+                  NSLog(@"update asked expire res=%@", responseObject);
                   success(responseObject);
                   
               } failure:^(NSError *error) {
@@ -536,7 +542,7 @@ allow_invite_request: (BOOL) allow_invite_request
     [self PostRequest: @"event_api/delete_event.php"
            parameters: parameters
               success:^(id responseObject) {
-                  
+                  NSLog(@"delete event res=%@", responseObject);
                   success(responseObject);
                   
               } failure:^(NSError *error) {
@@ -561,7 +567,7 @@ allow_invite_request: (BOOL) allow_invite_request
     [self PostRequest: @"attendee_api/post_attendee.php"
            parameters: parameters
               success:^(id responseObject) {
-                  
+                  NSLog(@"post attendee res=%@", responseObject);
                   success(responseObject);
                   
               } failure:^(NSError *error) {
@@ -583,7 +589,7 @@ allow_invite_request: (BOOL) allow_invite_request
     [self PostRequest: @"attendee_api/get_attend.php"
            parameters: parameters
               success:^(id responseObject) {
-                  
+                  NSLog(@"get attend res=%@", responseObject);
                   success(responseObject);
                   
               } failure:^(NSError *error) {
@@ -604,7 +610,7 @@ allow_invite_request: (BOOL) allow_invite_request
     [self PostRequest: @"attendee_api/get_attended_userlist.php"
            parameters: parameters
               success:^(id responseObject) {
-                  
+                  NSLog(@"get attended user list res=%@", responseObject);
                   success(responseObject);
                   
               } failure:^(NSError *error) {
@@ -624,7 +630,7 @@ allow_invite_request: (BOOL) allow_invite_request
     [self PostRequest: @"attendee_api/get_my_attend.php"
            parameters: parameters
               success:^(id responseObject) {
-                  
+                  NSLog(@"get my attend res=%@", responseObject);
                   success(responseObject);
                   
               } failure:^(NSError *error) {
@@ -646,7 +652,7 @@ allow_invite_request: (BOOL) allow_invite_request
     [self PostRequest: @"attendee_api/delete_attend.php"
            parameters: parameters
               success:^(id responseObject) {
-                  
+                  NSLog(@"delete attend res=%@", responseObject);
                   success(responseObject);
                   
               } failure:^(NSError *error) {
@@ -668,7 +674,7 @@ allow_invite_request: (BOOL) allow_invite_request
     [self PostRequest: @"attend_images/get_attend_images.php"
            parameters: parameters
               success:^(id responseObject) {
-                  
+                  NSLog(@"get attend image res=%@", responseObject);
                   success(responseObject);
                   
               } failure:^(NSError *error) {
@@ -692,7 +698,7 @@ allow_invite_request: (BOOL) allow_invite_request
     [self PostRequest: @"attend_images/post_attend_image.php"
           parameters: parameters
              success:^(id responseObject) {
-                 
+                 NSLog(@"post attend image res=%@", responseObject);
                  success(responseObject);
                  
              } failure:^(NSError *error) {
@@ -708,7 +714,7 @@ allow_invite_request: (BOOL) allow_invite_request
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager GET:@"https://cieleathletics.com/wp-json/ciele/v1/stores/list" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+        NSLog(@"stores list res=%@", responseObject);
         success([responseObject valueForKey: @"stores"]);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error)
@@ -724,18 +730,24 @@ allow_invite_request: (BOOL) allow_invite_request
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    
+    /////
     [manager GET:@"https://cieleathletics.com/wp-json/wp/v2/posts" parameters: nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSMutableArray* result = [[NSMutableArray alloc] init];
-        
+        NSLog(@"post res=%@", responseObject);
         NSArray* arrResults = responseObject;
         if(arrResults != nil && [arrResults isKindOfClass: [NSArray class]] && [arrResults count] > 0)
         {
+            int unread_num=0;
             for (NSDictionary* dicItem in arrResults) {
                 Blog* b = [[Blog alloc] initWithDictionary: dicItem];
+                b.isRead = [self getIsRead:b.blogId];
+                if (!b.isRead) {
+                    unread_num++;
+                }
                 [result addObject: b];
             }
+            [AppEngine sharedInstance].currentUser.unread_blog_num = unread_num;
             success(result);
         }
         else
@@ -747,6 +759,13 @@ allow_invite_request: (BOOL) allow_invite_request
      {
          failure(error.description);
      }];
+}
+
+- (BOOL) getIsRead: (int) blog_id {
+    NSString *gen_key = [NSString stringWithFormat:@"%@-%d", [AppEngine sharedInstance].currentUser.user_id, blog_id];
+    NSLog(@"%@", gen_key);
+    BOOL flag = [[NSUserDefaults standardUserDefaults] boolForKey:gen_key];
+    return flag;
 }
 
 - (void) getBlogs: (float) lat
@@ -764,6 +783,7 @@ allow_invite_request: (BOOL) allow_invite_request
     
     [manager GET:@"https://cieleathletics.com/wp-json/ciele/v1/events" parameters: params success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
+        NSLog(@"event res=%@", responseObject);
         NSArray* arrResults = responseObject;
         if(arrResults != nil && [arrResults isKindOfClass: [NSArray class]] && [arrResults count] > 0)
         {
@@ -788,8 +808,10 @@ allow_invite_request: (BOOL) allow_invite_request
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", nil];
     [manager GET: mediaURL parameters: nil success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
+        NSLog(@"media url res=%@", responseObject);
         NSDictionary* guid = responseObject[@"guid"];
         NSString* rendered = guid[@"rendered"];
         success(rendered);
@@ -797,6 +819,7 @@ allow_invite_request: (BOOL) allow_invite_request
     } failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
          failure(error.description);
+         NSLog(@"Error: %@", [error.userInfo objectForKey:@"NSLocalizedDescription"]);
      }];
 }
 
@@ -808,6 +831,7 @@ allow_invite_request: (BOOL) allow_invite_request
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager GET: kMemberEventURL parameters: nil success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
+         NSLog(@"menber event res=%@", responseObject);
          NSArray* locations = responseObject[@"locations"];
          if(locations != nil && [locations isKindOfClass: [NSArray class]])
          {

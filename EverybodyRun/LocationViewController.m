@@ -57,11 +57,6 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
     lpgr.minimumPressDuration = 0.5;
     [mvMain addGestureRecognizer:lpgr];
     
-//    tbList.layer.zPosition = 99;
-//    tbList.allowsSelection = YES;
-//    tbList.delegate = self;
-//    tbList.dataSource = self;
-//    tbList.userInteractionEnabled = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -111,16 +106,21 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
         styleURL = [NSURL URLWithString: MAP_TYPE_SAT_URL];
     }
 
-    mvMain = [[MGLMapView alloc] initWithFrame:viMapContainer.bounds
-                                      styleURL:styleURL];
+    CGRect rect = CGRectMake(viMapContainer.bounds.origin.x, viMapContainer.bounds.origin.y, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    mvMain = [[MGLMapView alloc] initWithFrame:rect styleURL:styleURL];
+//    mvMain = [[MGLMapView alloc] initWithFrame:viMapContainer.bounds styleURL:styleURL];
     
     [mvMain setCenterCoordinate:CLLocationCoordinate2DMake([AppEngine sharedInstance].currentLatitude, [AppEngine sharedInstance].currentLongitude)
                         zoomLevel:MAP_ZOOM_LEVEL
                          animated:NO];
     mvMain.delegate = self;
     mvMain.userTrackingMode = MKUserTrackingModeFollow;
+    mvMain.showsUserLocation = NO;
+    
     [viMapContainer addSubview: mvMain];
+    [viMapContainer addSubview:btSnapToRoad];
     [viMapContainer addSubview:tbList];
+
 
     if(_locationType == LOCATION_CURRENT)  ///
     {
@@ -203,6 +203,7 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
             MGLPolyline *polyline = [MGLPolyline polylineWithCoordinates:coordinates count: arrPins.count];
             [arrNormalRoutes addObject: polyline];
             [mvMain addOverlay: polyline];
+//            [mvMain addAnnotation:polyline];
         }
     }
     [self updateLocation: arrPins];
@@ -367,6 +368,11 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
 //    }
 //}
 
+//- (void)mapView:(MGLMapView *)mapView didUpdateUserLocation:(MGLUserLocation *)userLocation {
+//    
+//    MGLAnnotationView *annotationView = [mapView viewForAnnotation:userLocation];
+//    
+//}
 
 - (MGLAnnotationView *)mapView:(MGLMapView *)mapView viewForAnnotation:(id <MGLAnnotation>)annotation {
     // This example is only concerned with point annotations.
@@ -440,6 +446,9 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
         [arrSnapRoutesPoints removeAllObjects];
         
         int index = 0;
+        [SVProgressHUD show];
+        [btSnapToRoad setUserInteractionEnabled:NO];
+        [mvMain setUserInteractionEnabled:NO];
         [self calculateRoutes: index];
     }
 }
@@ -460,6 +469,9 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
             if(index >= [arrPins count] - 2) {
                 [mvMain removeOverlays: arrSnapRoutes];
                 [mvMain addOverlays: arrSnapRoutes];
+                [btSnapToRoad setUserInteractionEnabled:YES];
+                [mvMain setUserInteractionEnabled:YES];
+                [SVProgressHUD dismiss];
             } else
             {
                 [self calculateRoutes: index + 1];
@@ -476,7 +488,8 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
     MKDirectionsRequest *request = [[MKDirectionsRequest alloc] init];
     [request setSource: itemStart];
     [request setDestination: itemEnd];
-    [request setTransportType:MKDirectionsTransportTypeWalking]; // This can be limited to automobile and walking directions.
+    [request setTransportType:MKDirectionsTransportTypeWalking];
+//    [request setTransportType:MKDirectionsTransportTypeAny]; // This can be limited to automobile and walking directions.
     [request setRequestsAlternateRoutes: YES]; // Gives you several route options.
     MKDirections *directions = [[MKDirections alloc] initWithRequest:request];
     [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
@@ -510,6 +523,8 @@ static NSString *const searchResultsCellIdentifier =  @"HNKDemoSearchResultsCell
                 success();
             }
             dispatch_sync(dispatch_get_main_queue(), ^{
+                
+//                NSLog(@"-------");
 //                // Update UI
 //                // Example:
 //                // self.myLabel.text = result;

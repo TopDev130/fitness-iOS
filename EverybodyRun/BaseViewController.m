@@ -30,7 +30,14 @@
 
 - (void) initMember
 {
-    
+    if ([AppEngine sharedInstance].currentUser != nil) {
+        [[NetworkClient sharedClient] getNotifications: [AppEngine sharedInstance].currentUser.user_id success:^(NSArray *array) {
+            [AppEngine sharedInstance].currentUser.unread_notification_num = (int)[array count];
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"unReadEventNotification" object:nil];
+        } failure:^(NSError *error) {
+            
+        }];
+    }
 }
 
 - (IBAction) actionBack:(id)sender
@@ -44,6 +51,8 @@
     id homeView = [storyboard instantiateViewControllerWithIdentifier: @"HomeViewController"];
     id leftView = [storyboard instantiateViewControllerWithIdentifier: @"MenuViewController"];
     id rightView = [storyboard instantiateViewControllerWithIdentifier: @"BlogListViewController"];
+    
+    
     
     MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController
                                                     containerWithCenterViewController:homeView

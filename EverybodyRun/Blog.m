@@ -14,9 +14,11 @@
 {
     if(self = [super init])
     {
+        self.blogId = [dicBlog[@"id"] intValue];
         self.title = dicBlog[@"title"][@"rendered"];
         self.content = dicBlog[@"content"][@"rendered"];
         self.link = dicBlog[@"link"];
+        self.isRead = false;
         NSDictionary* links = dicBlog[@"_links"];
         NSArray* arrFeaturdMedia = links[@"https://api.w.org/featuredmedia"];
         if(arrFeaturdMedia != nil && [arrFeaturdMedia count] > 0)

@@ -13,6 +13,8 @@
     
 }
 
+@property (nonatomic)         int               blogId;
+@property (nonatomic)         BOOL              isRead;
 @property (nonatomic, retain) NSString          *title;
 @property (nonatomic, retain) NSString          *content;
 @property (nonatomic, retain) NSString          *mediaURL;

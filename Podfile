@@ -17,4 +17,5 @@ pod 'CoreTextLabel'
 pod 'JTCalendar', '~> 2.0'
 pod 'MarqueeLabel'
 pod 'QTree-objc'
+pod 'Pushwoosh', '~> 5.0'
 end

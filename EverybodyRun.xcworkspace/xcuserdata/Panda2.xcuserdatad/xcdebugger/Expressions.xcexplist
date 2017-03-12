@@ -3,6 +3,50 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "__57-[NetworkClient loginWithEmail:password:success:failure:]_block_invoke:NetworkClient.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[HomeViewController todayFilter]:HomeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[AppEngine sharedInstance].filterDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[HomeViewController refreshMapView]:HomeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[NSDate date]">
+            </PersistentString>
+            <PersistentString
+               value = "[AppEngine sharedInstance].filterDate">
+            </PersistentString>
+            <PersistentString
+               value = "[e isExpire: [AppEngine sharedInstance].filterDate]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LocationViewController initMember]:LocationViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "viMapContainer.frame">
+            </PersistentString>
+            <PersistentString
+               value = "viMapContainer.bounds">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[NetworkClient loginWithEmail:password:success:failure:]:NetworkClient.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[AppEngine sharedInstance].currentDeviceToken">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[Event isExpire:]:Event.m">
          <PersistentStrings>
             <PersistentString
@@ -19,21 +63,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[HomeViewController refreshMapView]:HomeViewController.m">
+         contextName = "-[NetworkClient signWithEmail:firstName:lastName:birthday:gender:password:avatar:success:failure:]:NetworkClient.m">
          <PersistentStrings>
             <PersistentString
-               value = "[NSDate date]">
-            </PersistentString>
-            <PersistentString
-               value = "[AppEngine sharedInstance].filterDate">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[HomeViewController todayFilter]:HomeViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[AppEngine sharedInstance].filterDate">
+               value = "[AppEngine sharedInstance].currentDeviceToken">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

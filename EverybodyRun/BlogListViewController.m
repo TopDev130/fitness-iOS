@@ -12,7 +12,7 @@
 #import "MFSideMenu.h"
 #import "WebViewController.h"
 
-@interface BlogListViewController () <UITableViewDataSource, UITableViewDelegate, BlogLocationTableViewCellDelegate>
+@interface BlogListViewController () <UITableViewDataSource, UITableViewDelegate, BlogLocationTableViewCellDelegate, UIViewControllerTransitioningDelegate>
 {
     NSMutableArray          *arrItems;
     BOOL                    isLocalBlog;
@@ -58,10 +58,16 @@
         [arrItems removeAllObjects];
         [arrItems addObjectsFromArray: items];
         [tbList reloadData];
+        [self updateParrentUI];
+//        NSLog(@"---%d",[AppEngine sharedInstance].currentUser.unread_blog_num);
         
     } failure:^(NSString *errorMessage) {
         
     }];
+}
+
+- (void) updateParrentUI {
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"unreadBlogNotification" object:nil];
 }
 
 - (void) updateUI {
@@ -142,6 +148,7 @@
         }
         
         cell.delegate = self;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell setBlog: currLocationBlog];
         return cell;
     }
@@ -152,6 +159,7 @@
             cell = [nib objectAtIndex:0];
         }
         cell.delegate = self;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell setBlog: [arrItems objectAtIndex: indexPath.row]];
         return cell;
     }
@@ -163,6 +171,11 @@
     WebViewController* nextView = [storyboard instantiateViewControllerWithIdentifier: @"WebViewController"];
     nextView.title = b.title;
     nextView.url = b.link;
+    b.isRead = YES;
+    NSString *gen_key = [NSString stringWithFormat:@"%@-%d", [AppEngine sharedInstance].currentUser.user_id, b.blogId];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:gen_key];
+    [AppEngine sharedInstance].currentUser.unread_blog_num--;
+    [self updateParrentUI];
     [self.navigationController pushViewController: nextView animated: YES];
 }
 
@@ -180,6 +193,13 @@
 }
 
 - (IBAction) actionCloseBlog:(id)sender {
+    /////
+    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    if (isLocalBlog) {
+        [nc postNotificationName:@"localizedBlogNotification" object:nil userInfo:@{@"isLocalBlog":@1}];
+    } else {
+        [nc postNotificationName:@"localizedBlogNotification" object:nil userInfo:@{@"isLocalBlog":@0}];
+    }
     [self.menuContainerViewController setMenuState: MFSideMenuStateClosed];
 }
 

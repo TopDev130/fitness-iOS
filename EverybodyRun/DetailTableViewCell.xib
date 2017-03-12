@@ -1,19 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="GOTHIC.TTF">
+        <array key="GOTHIC.TTF">
             <string>CenturyGothic</string>
-            <string>CenturyGothic</string>
-            <string>CenturyGothic</string>
-            <string>CenturyGothic</string>
-            <string>CenturyGothic</string>
-            <string>CenturyGothic</string>
-            <string>CenturyGothic</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -31,7 +29,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wya-NW-xZ4">
                                 <rect key="frame" x="36" y="10" width="327" height="21"/>
                                 <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin71.png" translatesAutoresizingMaskIntoConstraints="NO" id="jTp-XF-9NT">
@@ -43,19 +41,20 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XB3-Pi-AZo">
                                 <rect key="frame" x="0.0" y="39" width="375" height="1"/>
-                                <color key="backgroundColor" red="0.51764705882352935" green="0.89411764705882346" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.51764705882352935" green="0.89411764705882346" blue="0.51764705882352935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Ahr-vm-CAs"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8eP-Y6-pre">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="actionLocation:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="z4n-c1-1Rp"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="Qu9-wy-C9j"/>
                             <constraint firstItem="XB3-Pi-AZo" firstAttribute="leading" secondItem="XLX-4o-OLY" secondAttribute="leading" id="WTs-tL-4dJ"/>
@@ -75,7 +74,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vL7-pm-48B">
                                 <rect key="frame" x="36" y="10" width="327" height="21"/>
                                 <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar53.png" translatesAutoresizingMaskIntoConstraints="NO" id="hau-po-RxK">
@@ -87,13 +86,13 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e0m-fU-k60">
                                 <rect key="frame" x="0.0" y="39" width="375" height="1"/>
-                                <color key="backgroundColor" red="0.51764705879999995" green="0.89411764709999997" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.51764705879999995" green="0.89411764709999997" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="wNk-eh-zoI"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="hau-po-RxK" firstAttribute="centerY" secondItem="C4z-By-oh1" secondAttribute="centerY" constant="1.5" id="7HJ-tn-OLS"/>
                             <constraint firstAttribute="bottom" secondItem="e0m-fU-k60" secondAttribute="bottom" id="CDZ-ct-sU7"/>
@@ -113,7 +112,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7x-oL-fH4">
                                 <rect key="frame" x="36" y="10" width="327" height="21"/>
                                 <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock96.png" translatesAutoresizingMaskIntoConstraints="NO" id="Mco-nN-4zt">
@@ -125,13 +124,13 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v9W-hC-ZQ5">
                                 <rect key="frame" x="0.0" y="39" width="375" height="1"/>
-                                <color key="backgroundColor" red="0.51764705879999995" green="0.89411764709999997" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.51764705879999995" green="0.89411764709999997" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="KtG-oT-Ohs"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="v9W-hC-ZQ5" secondAttribute="bottom" id="OL0-8l-nFD"/>
                             <constraint firstAttribute="trailing" secondItem="R7x-oL-fH4" secondAttribute="trailing" constant="12" id="OsL-Dg-1cV"/>
@@ -151,12 +150,12 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03v-FR-nqn">
                                 <rect key="frame" x="36" y="10" width="327" height="21"/>
                                 <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U5c-87-B5b">
                                 <rect key="frame" x="0.0" y="39" width="375" height="1"/>
-                                <color key="backgroundColor" red="0.51764705879999995" green="0.89411764709999997" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.51764705879999995" green="0.89411764709999997" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="arZ-T9-h3c"/>
                                 </constraints>
@@ -169,7 +168,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="FeN-ok-ddx"/>
                             <constraint firstAttribute="trailing" secondItem="03v-FR-nqn" secondAttribute="trailing" constant="12" id="Myi-S8-ynI"/>
@@ -189,7 +188,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZc-57-a9g">
                                 <rect key="frame" x="36" y="10" width="327" height="21"/>
                                 <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pyramid9.png" translatesAutoresizingMaskIntoConstraints="NO" id="8EN-j8-W2l">
@@ -201,10 +200,10 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KoN-B2-h3q">
                                 <rect key="frame" x="0.0" y="39" width="375" height="1"/>
-                                <color key="backgroundColor" red="0.51764705879999995" green="0.89411764709999997" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.51764705879999995" green="0.89411764709999997" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="HZc-57-a9g" firstAttribute="leading" secondItem="8EN-j8-W2l" secondAttribute="trailing" constant="5" id="16I-uF-dUy"/>
                             <constraint firstItem="8EN-j8-W2l" firstAttribute="leading" secondItem="JQg-MA-x4F" secondAttribute="leading" constant="8" id="3dz-LB-Hsh"/>
@@ -228,7 +227,7 @@
                                     <constraint firstAttribute="height" constant="21" id="A82-gQ-rfM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="distance1.png" translatesAutoresizingMaskIntoConstraints="NO" id="133-NG-PE8">
@@ -240,13 +239,13 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNU-4F-d1K">
                                 <rect key="frame" x="0.0" y="39" width="375" height="1"/>
-                                <color key="backgroundColor" red="0.51764705879999995" green="0.89411764709999997" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.51764705879999995" green="0.89411764709999997" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="UYZ-yZ-KuX"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="EKt-5v-atO" firstAttribute="centerY" secondItem="Pb6-aa-cys" secondAttribute="centerY" id="3a1-m1-aF1"/>
                             <constraint firstItem="133-NG-PE8" firstAttribute="leading" secondItem="Pb6-aa-cys" secondAttribute="leading" constant="8" id="6v2-cF-sLz"/>
@@ -264,8 +263,9 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Visibility:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djE-nF-mPZ">
                                 <rect key="frame" x="36" y="10" width="327" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="CenturyGothic" family="Century Gothic" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.78039215689999997" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eye106.png" translatesAutoresizingMaskIntoConstraints="NO" id="ilV-x8-4t5">
@@ -277,13 +277,13 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kwS-7Y-ZQ2">
                                 <rect key="frame" x="0.0" y="39" width="375" height="1"/>
-                                <color key="backgroundColor" red="0.51764705879999995" green="0.89411764709999997" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.51764705879999995" green="0.89411764709999997" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="PuM-d6-4jv"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="2Ej-ir-Vg4"/>
                             <constraint firstItem="ilV-x8-4t5" firstAttribute="centerY" secondItem="f0c-1V-fav" secondAttribute="centerY" constant="1.5" id="6q1-H9-Mny"/>
@@ -294,7 +294,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.80000000000000004" green="0.95686274509803915" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.80000000000000004" green="0.95686274509803915" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="AMI-fM-Fr5" firstAttribute="top" secondItem="C4z-By-oh1" secondAttribute="bottom" id="3xu-Hg-UpD"/>
                     <constraint firstAttribute="trailing" secondItem="JQg-MA-x4F" secondAttribute="trailing" id="4v3-pz-fCg"/>

@@ -19,6 +19,7 @@
 }
 
 @property (nonatomic, weak) IBOutlet UILabel            *lbTitle;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tailingConstant;
 @property (nonatomic, retain) id                        delegate;
 
 - (void) setNotification: (NSString*) notification;

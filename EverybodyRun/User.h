@@ -28,6 +28,8 @@
 @property (nonatomic, strong) NSNumber          *birthday;
 @property (nonatomic, strong) NSNumber          *gender;
 @property (nonatomic, strong) NSString          *location;
+@property (nonatomic) int unread_blog_num;
+@property (nonatomic) int unread_notification_num;
 
 - (id) initWithDictionary: (NSDictionary*) dicUser;
 - (id) initWithManageObject: (NSManagedObject*) objUser;

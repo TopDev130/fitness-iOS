@@ -34,11 +34,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateUnreadNotification) name:@"unReadEventNotification" object:nil];
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) initMember
@@ -49,6 +56,11 @@
     
     arrItems = @[@"Notifications", @"Settings", @"Tutorial", @"Suggest a Service", @"Ciele Athletics Website", @"Terms of Use", @"Privacy Policy", @"Log out"];
     [tbMain registerNib: [UINib nibWithNibName: @"MenuTableViewCell" bundle:nil] forCellReuseIdentifier:NSStringFromClass([MenuTableViewCell class])];
+}
+
+- (void) updateUnreadNotification {
+    NSLog(@"$$$$$$");
+    [tbMain reloadData];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -62,6 +74,13 @@
     NSString* firstName = [AppEngine sharedInstance].currentUser.first_name;
     NSString* lastName = [AppEngine sharedInstance].currentUser.last_name;
     lbUsername.text = [NSString stringWithFormat: @"%@ %@", firstName, lastName];
+    
+    [[NetworkClient sharedClient] getNotifications: [AppEngine sharedInstance].currentUser.user_id success:^(NSArray *array) {
+        [AppEngine sharedInstance].currentUser.unread_notification_num = (int)[array count];
+        [tbMain reloadData];
+    } failure:^(NSError *error) {
+        [self presentViewController: [AppEngine showErrorWithText: MSG_INTERNET_ERROR] animated: YES completion: nil];
+    }];
 }
 
 - (IBAction) actionLogout:(id)sender
@@ -107,6 +126,18 @@
     
     NSString *name = [arrItems objectAtIndex:indexPath.row];
     [cell setMenuItem: name];
+    
+    if ([name isEqualToString:@"Notifications"]) {
+        int notificationCount = [AppEngine sharedInstance].currentUser.unread_notification_num;
+        cell.lbNotificationNum.text = [NSString stringWithFormat:@"%d", [AppEngine sharedInstance].currentUser.unread_notification_num];
+        if (notificationCount == 0) {
+            cell.unReadView.hidden = YES;
+        } else {
+            cell.unReadView.hidden = NO;
+        }
+    } else {
+        cell.unReadView.hidden = YES;
+    }
     return cell;
 }
 

@@ -178,7 +178,20 @@
 {
     switch (index) {
         case 0:
+        {
             NSLog(@"send notification button clicked!");
+            Event* e = [(TitleTableViewCell*)cell event];
+            if([e.post_user_id intValue] == [[AppEngine sharedInstance].currentUser.user_id intValue])
+            {
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                CreateEventViewController* nextView = [storyboard instantiateViewControllerWithIdentifier: @"CreateEventViewController"];
+                nextView.currentEvent = e;
+                nextView.isEditing = YES;
+                nextView.parentView = self;
+                nextView.isUpdate = YES;
+                [self.navigationController pushViewController: nextView animated: YES];
+            }
+        }
             break;
             
         default:

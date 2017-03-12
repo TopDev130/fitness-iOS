@@ -99,6 +99,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    if (self.isUpdate==YES) {
+        [self updateEvent];
+    }
 }
 
 - (void) initMember
@@ -205,8 +209,13 @@
 - (void) initInputUI
 {
     [self.view addSubview: viInput];
-    viInput.frame = CGRectMake(0, self.view.bounds.size.height - viInput.frame.size.height, self.view.bounds.size.width, viInput.frame.size.height);
+    NSLog(@"Height=%f",viInput.frame.size.height);
+    NSLog(@"width=%f",viInput.frame.size.width);
+    viInput.frame = CGRectMake(0, self.view.bounds.size.height - 260, self.view.bounds.size.width, 260);
     viInput.hidden = YES;
+
+//    viInput.frame = CGRectMake(0, self.view.bounds.size.height - viInput.frame.size.height, self.view.bounds.size.width, viInput.frame.size.height);
+//    viInput.hidden = YES;
 }
 
 - (void) initSliderLevel
